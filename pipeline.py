@@ -30,7 +30,7 @@ def Read_data(filename):
         return df
 
     elif '.json' in filename:
-    	df = pd.read_json(filename, index_col=0)
+        df = pd.read_json(filename, index_col=0)
         print(filename + " is sucessfully loaded")
         return df
     
@@ -140,30 +140,30 @@ def Fill_in(df, cols, method="mean"):
             val = df[col].mean()
         if method =='median':
             val = df[col].median()
-        	df[col] = df[col].fillna(val, inplace = True)
+            df[col] = df[col].fillna(val, inplace = True)
         print ('Filling missing value for {} using {}'.format(col, method))
     return df
 
 
 def Imputer(df, cols):
-	# make copy of the original data
-	copy_df = df.copy()
+    # make copy of the original data
+    copy_df = df.copy()
 
-	# make new columns indicating what will be imputed
-	cols_with_missing = (col for col in copy_df.columns if copy_df[col].isnull().any())
-	for col in cols_with_missing:
-		copy_df[col + '_was_missing'] = copy_df[col].isnull()
+    # make new columns indicating what will be imputed
+    cols_with_missing = (col for col in copy_df.columns if copy_df[col].isnull().any())
+    for col in cols_with_missing:
+        copy_df[col + '_was_missing'] = copy_df[col].isnull()
 
-	# imputation
-	imputer = Imputer()
-	imputed_df = pd.DataFrame(imputer.fit_transform(copy_df))
-	imputed_df.columns = copy_df.columns
+    # imputation
+    imputer = Imputer()
+    imputed_df = pd.DataFrame(imputer.fit_transform(copy_df))
+    imputed_df.columns = copy_df.columns
 
-	# rounding numbers
-	for cols in columns:
-		imputed_df[cols].round(0)
+    # rounding numbers
+    for cols in columns:
+        imputed_df[cols].round(0)
 
-	return imputed_df
+    return imputed_df
 
 
 # HANDLE OUTLIERS
@@ -191,47 +191,47 @@ def remove_outlier(df, col_name):
 # SETTING THE CEILINGS & BUCKETING
 
 def ceiling(x, cap_max):
-	if x > cap_max:
-		return cap_max
-	else:
-		return x
+    if x > cap_max:
+        return cap_max
+    else:
+        return x
 
 def flooring(x, cap_min):
-	if x > cap_min:
-		return cap_min
-	else:
-		return x
+    if x > cap_min:
+        return cap_min
+    else:
+        return x
 
 def set_boundaries(df,columns):
 
-	for col in columns:
-		upper_outlier = df[col].quantile(.999)
-		df[col] = df[col].apply(lambda x: ceiling(x, upper_outlier))
-		lower_outlier = df[col].quantile(.001)
-		df[col] = df[col].apply(lambda x: flooring(x, lower_outlier))
+    for col in columns:
+        upper_outlier = df[col].quantile(.999)
+        df[col] = df[col].apply(lambda x: ceiling(x, upper_outlier))
+        lower_outlier = df[col].quantile(.001)
+        df[col] = df[col].apply(lambda x: flooring(x, lower_outlier))
 
-	return None
+    return None
 
 def into_buckets(df, columns, bins = 0, quant = 0):
-	# q=4 for quartiles, q=10 for deciles
-	for col in columns:
+    # q=4 for quartiles, q=10 for deciles
+    for col in columns:
 
-		if bins != 0:
-			df[col[:len(df.columns)]+'_buckets'] = pd.cut(df[col], bins=bins)
-		if quant != 0:
-			df[col[:len(df.columns)]+'_buckets'] = pd.qcut(df[col], q=quant)
+        if bins != 0:
+            df[col[:len(df.columns)]+'_buckets'] = pd.cut(df[col], bins=bins)
+        if quant != 0:
+            df[col[:len(df.columns)]+'_buckets'] = pd.qcut(df[col], q=quant)
 
-	return df
+    return df
 
 
 # CREATE DUMMIES
 
 def create_dummy(df, columns):
-	for col in columns:
-		dummy = pd.get_dummies(df[col], prefix=col)
-		df = pd.concat([df, dummy], axis=1)
+    for col in columns:
+        dummy = pd.get_dummies(df[col], prefix=col)
+        df = pd.concat([df, dummy], axis=1)
 
-	return df
+    return df
 
 # Visualize
 
@@ -308,7 +308,7 @@ def plotting_top_10_bar_plot  (df, feature):
 
 def Split_Data(df, target, features, test_size = 0.2):
     #X = df.drop([target], axis=1)
-   	features = np.array(features)
+    features = np.array(features)
     X = df[features]
     Y = df[target]
     x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = test_size, random_state = 42)
@@ -322,11 +322,11 @@ def Classifier(model, num, x_train, y_train):
     elif model == 'DT':
         clf = DecisionTreeClassifier(max_depth=num)
     elif model == 'RF':
-    	clf = RandomForestClassifier(max_depth=num)
+        clf = RandomForestClassifier(max_depth=num)
     elif model == 'BAG':
-    	clf = BaggingClassifier(max_samples=num, bootstrap=True, random_state=0)
+        clf = BaggingClassifier(max_samples=num, bootstrap=True, random_state=0)
     elif model == 'BOOST':
-    	clf = GradientBoostingClassifier(max_depth=num)
+        clf = GradientBoostingClassifier(max_depth=num)
     
     clf.fit(x_train, y_train)
     y_pred = clf.predict(x_test)
