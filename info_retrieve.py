@@ -1,7 +1,7 @@
 
 import requests
 
-#Andrew Dend
+#Andrew Deng
 
 def info_retrieve(blkgrp, county, tract, gender):
 	
