@@ -27,8 +27,7 @@ class Connect():
         try:
             self.conn = psycopg2.connect(**params)
             print("Connected successfully.")
-        except Exception as e:
-            print(e)
+        except:
             print("Failed to connect.")
 
         self.conn = self.conn.cursor()
