@@ -140,7 +140,7 @@ def Fill_in(df, cols, method="mean"):
             val = df[col].mean()
         if method =='median':
             val = df[col].median()
-            df[col] = df[col].fillna(val, inplace = True)
+        df[col] = df[col].fillna(val, inplace = True)
         print ('Filling missing value for {} using {}'.format(col, method))
     return df
 
