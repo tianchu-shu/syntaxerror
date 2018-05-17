@@ -314,7 +314,7 @@ def Split_Data(df, target, features, test_size = 0.2):
     x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = test_size, random_state = 42)
     return x_train, x_test, y_train, y_test
 
-def Classifier(model, num, x_train, y_train):
+def Classifier(model, num, x_train, y_train, x_test):
     if model == 'LR':
         clf = LogisticRegression('l2', C=num)
     elif model == 'KNN':
