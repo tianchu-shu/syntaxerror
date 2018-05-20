@@ -88,7 +88,7 @@ def info_retrieve(table):
 		else:
 			asc.append([None]*len(json_dict[1]))
 
-
+			
 	# return api dataframe
 	colnames = ['food_stamps', 'unmarried_partner', 'occupation', 'capita_income', 'mean_work_hr', 'ss_inc', 'pov_ind', 'edu25']
 	asc_df = pd.DataFrame(asc, columns = colnames)
