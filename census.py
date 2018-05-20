@@ -13,6 +13,9 @@ import requests
 def alter_zip(x):
 '''
 Padding with zeros
+
+Input - (int) x
+Ouput - (str) x
 '''
 
     x = str(x)
@@ -49,6 +52,7 @@ Getting fips from geo API
 Input - (DataFrame) table
 Output - (DataFrame) table
 	: table with additional 'fips code' column
+	
 '''
 
 	fips = []
@@ -74,6 +78,7 @@ Breaking down fips into state, county, tract, and blockgroup codes
 Input - (DataFrame) table
 Output - (DataFrame) table
 	: table with additional state, county, tract and blockgroup columns
+	
 '''
 
 	temp = np.array(table['fips'])
@@ -96,6 +101,7 @@ Getting demographic data from census API
 Input - (DataFrame) table
 Output - (DataFrame) total_df
 	: table with demographic data
+	
 '''
 
 	asc = []
