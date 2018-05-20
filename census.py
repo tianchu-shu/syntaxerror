@@ -11,6 +11,9 @@ import requests
 
 
 def alter_zip(x):
+'''
+Padding with zeros
+'''
 
     x = str(x)
     if len(x)==3:
@@ -19,6 +22,15 @@ def alter_zip(x):
 
 
 def to_lat_lon(table, ziptable):
+'''
+Padding with zeros if the length of zipcode is 3
+Dropping irrelevant columns and merge given tables
+
+Input - (DataFrame) table, ziptable
+Output - (DataFrame) table
+	: merged table on zipcode
+
+'''
 	
 	ziptable['zip'] = ziptable['zip'].apply(lambda x: alter_zip(x))   
 	ziptable = ziptable.drop(['city', 'state', 'timezone','dst'], axis=1) 
@@ -31,6 +43,13 @@ def to_lat_lon(table, ziptable):
 
 
 def get_fips(table):
+'''
+Getting fips from geo API
+
+Input - (DataFrame) table
+Output - (DataFrame) table
+	: table with additional 'fips code' column
+'''
 
 	fips = []
 	for i, row in table.iterrows():
@@ -49,6 +68,13 @@ def get_fips(table):
 
 
 def break_down(table):
+'''
+Breaking down fips into state, county, tract, and blockgroup codes
+
+Input - (DataFrame) table
+Output - (DataFrame) table
+	: table with additional state, county, tract and blockgroup columns
+'''
 
 	temp = np.array(table['fips'])
 	fips = [x for x in temp if x!=None]
@@ -64,6 +90,13 @@ def break_down(table):
 
 	
 def info_retrieve(table):
+'''
+Getting demographic data from census API
+
+Input - (DataFrame) table
+Output - (DataFrame) total_df
+	: table with demographic data
+'''
 
 	asc = []
 	for i, row in table.iterrows():
@@ -105,7 +138,7 @@ def info_retrieve(table):
 		# pov_ind = json_dict[1][7]
 		# edu25 = json_dict[1][8]
 	
-	return asc_df, total_df
+	return total_df
 
 
 
