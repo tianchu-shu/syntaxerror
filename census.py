@@ -56,7 +56,7 @@ def break_down(table):
 	county = [x[2:5] for x in temp if x!=None]
 	tract = [x[5:11] for x in temp if x!=None]
 	blockgroup = [x[11:12] for x in temp if x!=None]
-	fips = pd.DataFrame({'fips' : fips, 'county' : county, 'tract' : tract, 'blockgroup' : blockgroup })
+	fips = pd.DataFrame({'fips' : fips, 'state' : state, 'county' : county, 'tract' : tract, 'blockgroup' : blockgroup })
 	table = pd.merge(table, fips, left_on = 'fips', right_on = 'fips')
 
 	return table
