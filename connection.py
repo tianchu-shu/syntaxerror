@@ -44,15 +44,26 @@ class Connect():
 		else:
 			print("No Connection")
 
+	def run_query(self, query):
+		try:
+			self.cur.executre(query)
+		except:
+			print("Query Execution Failed, Rolling Back")
+			self.conn.rollback()
+			
 	def print_df(self, type, input_string):
 		if self.conn.closed == 0:
-			if type = 'table':
-				df = pd.read_sql_table(input_string, self.conn)
-			elif type = 'query':
-				df = pd.read_sql_query(input_string, self.conn)
-			else:
-				df = None
-				print("Invalid 'Type'")
-			return df
+			try:
+				if type = 'table':
+					df = pd.read_sql_table(input_string, self.conn)
+				elif type = 'query':
+					df = pd.read_sql_query(input_string, self.conn)
+				else:
+					df = None
+					print("Invalid 'Type'")
+				return df
+			except:
+				print("Query Execution Failed, Rolling Back")
+				self.conn.rollback()
 		else:
 			print("No Connection")
