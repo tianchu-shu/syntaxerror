@@ -41,6 +41,18 @@ class Connect():
             except Exception as e:
                 print("Failed to close connection.")
                 print(e)
+		else:
+			print("No Connection")
 
-
-
+	def print_df(self, type, input_string):
+        if self.conn.closed == 0:
+			if type = 'table':
+				df = pd.read_sql_table(input_string, self.conn)
+			elif type = 'query':
+				df = pd.read_sql_query(input_string, self.conn)
+			else:
+				df = None
+				print("Invalid 'Type'")
+			return df
+		else:
+			print("No Connection")
