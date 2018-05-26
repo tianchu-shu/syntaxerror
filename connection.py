@@ -10,7 +10,6 @@ class Connect():
         self.conn = None
         self.cur = None
         
-        
         self.connect_to()
     
 
