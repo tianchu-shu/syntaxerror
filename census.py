@@ -113,7 +113,7 @@ Output - (DataFrame) total_df
 	    tract = row['tract']
 
 
-		search_term = 'Name, B19058_001E, B9008_002E, B24124_001E, B19301_001E, B23018_001E, B19055_001E, B17001_001E, B20004_002E'
+		search_term = 'Name, B19058_001E, B09008_002E, B24124_001E, B19301_001E, B23018_001E, B19055_001E, B17001_001E, B20004_002E'
 		key = <Insert Key Here>
 		address = 'https://api.census.gov/data/2010/acs5?get={}&for=block+group:{}&in=state:{}+county:{}+tract:{}&key={}'.format(search_term, blkgrp, state, county, tract, key)
 
