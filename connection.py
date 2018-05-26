@@ -15,13 +15,11 @@ class Connect():
 
     def connect_to(self):
         
-        params = {
-            'dbname': 'jocodssg',
+        params = {'dbname': 'jocodssg',
             'user': 'jocodssg_students',
             'host': 'postgres.dssg.io',
             'password': 'aibaecighoobeeba',
-            'port': 5432
-        }
+            'port': 5432}
 
         try:
             self.conn = psycopg2.connect(**params)
