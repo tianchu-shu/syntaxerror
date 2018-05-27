@@ -1,4 +1,3 @@
-
 #Modified based on Rayid's magic loop
 
 import pandas as pd
@@ -30,7 +29,7 @@ small_grid = {'RF':{'n_estimators': [10,100], 'max_depth': [5,50], 'max_features
     'Logit': {'penalty': ['l1','l2'], 'C': [0.001,0.01,0.1,1,10]},
     'SVM' :{'C' :[0.01,0.1,1,10],'kernel':['linear']},
     'Tree': {'criterion': ['gini', 'entropy'], 'max_depth': [5,10,20,50], 'max_features': ['sqrt','log2'],'min_samples_split': [2,5]},
-    'Bag':{'n_estimators    ':[1,10,20,50], 'max_samples':[5,10], 'max_features': [5,10]},
+    'Bag':{'n_estimators':[1,10,20,50], 'max_samples':[5,10], 'max_features': [5,10]},
     'KNN' :{'n_neighbors': [1,10,50,100],'weights': ['uniform','distance'],'algorithm': ['auto','ball_tree','kd_tree']}
     }
 
