@@ -37,7 +37,6 @@ Output - (DataFrame) table
 	
 	ziptable['zip'] = ziptable['zip'].apply(lambda x: alter_zip(x))   
 	ziptable = ziptable.drop(['city', 'state', 'timezone','dst'], axis=1) 
-	table = table.drop(['tract2010id', 'blockgroup2010id', 'block2010id'], axis=1)
 
 	table = pd.merge(table, ziptable, on ='zip')
 
@@ -87,8 +86,9 @@ Output - (DataFrame) table
 	county = [x[2:5] for x in temp if x!=None]
 	tract = [x[5:11] for x in temp if x!=None]
 	blockgroup = [x[11:12] for x in temp if x!=None]
-	fips = pd.DataFrame({'fips' : fips, 'state' : state, 'county' : county, 'tract' : tract, 'blockgroup' : blockgroup })
-	table = pd.merge(table, fips, left_on = 'fips', right_on = 'fips')
+	fips_df = pd.DataFrame({'fips' : fips, 'state' : state, 'county' : county, 'tract' : tract, 'blockgroup' : blockgroup })
+	unique_fips = fips_df.drop_duplicates()
+	table = pd.merge(table, fips_df, left_on = 'fips', right_on = 'fips')
 
 	return table
 
@@ -108,12 +108,12 @@ Output - (DataFrame) total_df
 	for i, row in table.iterrows():
 	    fips = row['fips']
 	    blkgrp = row['blockgroup']
-	    state = row['state']
+	    state = row['state_y']
 	    county = row['county']
 	    tract = row['tract']
 
 
-		search_term = 'B19058_001E,B09008_002E,B24124_001E,B19301_001E,B23018_001E,B19055_001E,B17001_001E,B20004_002E'
+        search_term = 'B19301_001E,B17021_001E,B19001_001E,B25087_001E,B14005_001E,B09002_001E'
 		key = <Insert Key Here>
 		address = 'https://api.census.gov/data/2010/acs5?get={}&for=block+group:{}&in=state:{}+county:{}+tract:{}&key={}'.format(search_term, blkgrp, state, county, tract, key)
 
@@ -129,23 +129,27 @@ Output - (DataFrame) total_df
 
 			
 	# return api dataframe
-	colnames = ['food_stamps', 'unmarried_partner', 'occupation', 'capita_income', 'mean_work_hr', 'ss_inc', 'pov_ind', 'edu25']
+    colnames = ['fips','per_capita_income', 'poverty_stat', 'household_income', 'mortgage_stat', 'school_enrollment_16-19', 'own_children_under18',  'state', 'county', 'tract', 'blockgroup']
 	asc_df = pd.DataFrame(asc, columns = colnames)
+	unique_asc = asc_df.drop_duplicates()
 
 	# merge with the person table
-	total_df = pd.merge(table, asc_df, left_on = 'fips', right_on = 'fips')
+	# total_df = pd.merge(table, unique_asc, left_on = 'fips', right_on = 'fips')
 
-		# food_stamps = json_dict[1][1]
-		# unmarried_partner = json_dict[1][2]
-		# occupation = json_dict[1][3]
-		# capita_income = json_dict[1][4]
-		# mean_work_hr = json_dict[1][5]
-		# ss_inc = json_dict[1][6]
-		# pov_ind = json_dict[1][7]
-		# edu25 = json_dict[1][8]
 	
+	return unique_asc
+
+
+
+def merge(table1, table2):
+
+	total_df = pd.merge(table1, table2, left_one ='fips', right_on = 'fips')
+
 	return total_df
 
+
+
+#if __name__=="__main__":
 
 
 
