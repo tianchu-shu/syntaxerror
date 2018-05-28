@@ -46,7 +46,7 @@ class Connect():
 
 	def run_query(self, query):
 		try:
-			self.cur.executre(query)
+			self.cur.execute(query)
 		except:
 			print("Query Execution Failed, Rolling Back")
 			self.conn.rollback()
@@ -54,9 +54,9 @@ class Connect():
 	def print_df(self, type, input_string):
 		if self.conn.closed == 0:
 			try:
-				if type = 'table':
+				if type == 'table':
 					df = pd.read_sql_table(input_string, self.conn)
-				elif type = 'query':
+				elif type == 'query':
 					df = pd.read_sql_query(input_string, self.conn)
 				else:
 					df = None
