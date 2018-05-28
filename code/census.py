@@ -113,7 +113,7 @@ Output - (DataFrame) total_df
 	    tract = row['tract']
 
 
-        search_term = 'B19301_001E,B17021_001E,B19001_001E,B25087_001E,B14005_001E,B09002_001E'
+        search_term = 'B19301_001E,B17021_001E,B19001_001E,B25087_001E,B14005_001E,B09002_001E, B19056_001E'
 		key = <Insert Key Here>
 		address = 'https://api.census.gov/data/2010/acs5?get={}&for=block+group:{}&in=state:{}+county:{}+tract:{}&key={}'.format(search_term, blkgrp, state, county, tract, key)
 
@@ -129,7 +129,7 @@ Output - (DataFrame) total_df
 
 			
 	# return api dataframe
-    colnames = ['fips','per_capita_income', 'poverty_stat', 'household_income', 'mortgage_stat', 'school_enrollment_16-19', 'own_children_under18',  'state', 'county', 'tract', 'blockgroup']
+    colnames = ['fips','per_capita_income', 'poverty_stat', 'household_income', 'mortgage_stat', 'school_enrollment_16-19', 'own_children_under18', 'SSI_income', 'state', 'county', 'tract', 'blockgroup']
 	asc_df = pd.DataFrame(asc, columns = colnames)
 	unique_asc = asc_df.drop_duplicates()
 
