@@ -5,11 +5,6 @@ import requests
 
 
 
-#for example,
-#table = pd.read_csv("person.csv")
-#zipcodes = pd.read_csv("zipcodes.csv")
-
-
 def alter_zip(x):
 '''
 Padding with zeros
@@ -144,11 +139,6 @@ def merge(table1, table2):
 	total_df = pd.merge(table1, table2, left_one ='fips', right_on = 'fips')
 
 	return total_df
-
-
-
-#if __name__=="__main__":
-
 
 
 
