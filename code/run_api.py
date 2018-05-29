@@ -20,7 +20,7 @@ def run(data, zipcodes):
 	asc = asc.drop(cols+['state'], axis=1)
 
 	# Merging with asc data
-	total_df = pd.merge(fips, asc, left_on = 'fips', right_on = 'fips')
+	total_df = merge(fips, asc)
 
 	return total_df
 
