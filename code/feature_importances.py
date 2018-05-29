@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import metrics
 
-from datetime import datetime
+
 
 FEATURE_CLFS = {'RandomForestClassifier':'feature_importances',
         'ExtraTreesClassifier': 'feature_importances',
@@ -41,11 +41,11 @@ def feature_importance(clf, model, save=False):
 
 
 	if save:
-		sorted_features.to_csv('decisiontree_classifer.csv')
-		print("list of features is saved as ~.csv")
+		sorted_features.to_csv('{}.csv'.format(model))
+		print("List of features is saved as ~.csv")
 
-		features_figure.figure.savefig('Decisiontree_features.png')
-		print('figure is saved as a file Decisiontree_features.png')
+		features_figure.figure.savefig('{}.png'.format(model))
+		print('Figure is saved as a file {}_features.png'.format(model))
 	else:
 		print(sorted_features)
 		plt.show()
