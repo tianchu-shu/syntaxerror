@@ -25,6 +25,20 @@ CLFS = {'RF': RandomForestClassifier(n_estimators=50, n_jobs=-1),
         'KNN': KNeighborsClassifier(n_neighbors=3) 
             }
 
+
+
+FEATURE_CLFS = {'RandomForestClassifier':'feature_importances',
+        'ExtraTreesClassifier': 'feature_importances',
+        'AdaBoostClassifier': 'feature_importances',
+        'LogisticRegression': 'coef',
+        'svm.SVC': 'coef',
+        'GradientBoostingClassifier': 'feature_importances',
+        'GaussianNB': None,
+        'DecisionTreeClassifier': 'feature_importances',
+        'SGDClassifier': 'coef',
+        'KNeighborsClassifier': None,
+        'linear.SVC': 'coef'}
+
             
 LARGE_GRID = { 
 'RF':{'n_estimators': [1,10,100,1000,10000], 'max_depth': [1,5,10,20,50,100], 'max_features': ['sqrt','log2'],'min_samples_split': [2,5,10], 'n_jobs': [-1]},
