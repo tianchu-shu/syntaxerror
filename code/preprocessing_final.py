@@ -118,3 +118,19 @@ def processing_drop(df, drop_list, target_quantifier, value):
 			df = df[df[variable] <= value]
 	
 	return df
+
+
+# ROUND VALUES OF GIVEN COLUMNS WITH SPECIFIED PLACE
+def round_to(df, cols=None, digit=0):
+
+	if cols:
+		cols = cols
+	else:
+		cols = df.columns
+
+	for col in cols:
+		df[cols].round(digit)
+
+	print('given columns are rounded to {}'.format(digit))
+
+	return df
