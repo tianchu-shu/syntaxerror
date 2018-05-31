@@ -68,3 +68,34 @@ def outlier(df, variable):
 	print("Removed" + str(number_removed) + " outliers from " + variable)
 
 	return df_changed
+
+
+
+
+# CONVERT TYPE OF GIVEN COLUMNS TO SELECTED TYPE
+def type_to(df, cols, conv_type="int"):
+
+	if conv_type=="int":
+		for col in cols:
+			df[col] = df[col].astype(int)
+
+	if conv_type=="float":
+		for col in cols:
+			df[col] = df[col].astype(float)
+
+	if conv_type=="str":
+		for col in cols:
+			df[col] = df[col].astype(str)
+
+	print('given columns {} are coverted to {} type'.format(cols,conv_type))
+
+	return df
+
+
+# CONVERT GIVEN VALS(val1, val2) TO BINARY VALS(0,1) 
+def special_convert(df, cols, val1="t", val2="f"):
+	for col in cols:
+		df[col] = df[col].map({val1: 1, val2: 0})
+
+	return df
+
