@@ -149,3 +149,83 @@ def plotting_two_feature_comparison(dataframe, x_feature, y_feature):
         matplotlib.axes._subplots.AxesSubplot
     '''
     return dataframe[[x_feature, y_feature]].groupby(x_feature).sum().plot()
+
+
+
+# BAR PLOT
+def plot_df(df, columns, save=True):
+
+	for col in columns:
+		count_column = df[col].value_counts()
+		plt.figure(figsize=(len(count_column), 5))
+		column_figure = sns.barplot(count_column.index, count_column.values, alpha=0.8)
+		plt.title('{} values'.format(col))
+		plt.ylabel('Number of Counts', fontsize=12)
+		plt.xlabel(col, fontsize=12) 
+		
+		if save: 
+			column_figure.figure.savefig('{}.png'.format(col))
+			print('figure is saved as a file ~.png')
+		else:
+			plt.show()
+
+	return None
+
+
+
+def explore(df, var,  y = 'bail_amt'):
+    '''
+    Generate distribution graph for specific variable
+    Input:
+        df: pd dataframe
+        variable(string): the variable/attribute you want to explore
+        graph_typee(string): the type of graph you want to draw
+    Return:
+        a graph for a selected attribute. 
+    '''
+    
+    var_sum = df[[var, y]].groupby(var).sum()
+    var_sum.dropna(axis=0, how='all')
+    
+    var_mean = df[[var, y]].groupby(var).mean()
+    var_mean.dropna(axis=0, how='all')
+    
+    var_sum.plot(kind='bar', figsize=(8,4), color = 'purple')
+    var_mean.plot(kind='line', figsize=(8,4), color = 'green', marker='o', linestyle='--')
+    
+    plt.title('mean by '+str(var))
+    plt.show()
+
+
+
+def counting_uniques(df):
+    '''
+    For the given dataframe, gives a sum of the unique values in each feature.
+    Then prints a plot bar to represent that.
+    '''
+    print (df.nunique())
+    print (df.nunique().plot.bar())
+
+
+def counting_in_a_variable(feature, df):
+    '''
+    For a given feature and dataframe,
+        prints the total count of each category of that feature.
+    '''
+    print (df[feature].value_counts())
+
+	
+def making_pie (df, feature):
+    '''
+    Gives a pie plot of data in any feature
+    '''
+    if (df[feature].nunique()) < 10:    
+        try: 
+            df.groupby([feature]).size().plot(kind='pie')
+            plt.show()
+        except:
+            pass
+    else:
+        print (' ')
+
+	
