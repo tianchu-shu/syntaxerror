@@ -49,3 +49,22 @@ def fill_missing(df, list_to_fill, operation_type, value = None):
 			df[variable].fillna(value, inplace=True)
 	
 	return df
+
+
+def outlier(df, variable):
+	'''
+	Locate outliers in given column and eliminate them.
+	Inputs:
+	df: A pandas dataframe
+	variable: target column name, string
+	Outputs:
+	changed_df: A pandas dataframe without the outliers
+	'''
+	low_out = df[variable].quantile(0.005)
+	high_out = df[variable].quantile(0.995)
+	df_changed = df.loc[(df[variable] > low_out) & (df[variable] < high_out)]
+
+	number_removed = df.shape[0] - df_changed.shape[0]
+	print("Removed" + str(number_removed) + " outliers from " + variable)
+
+	return df_changed
