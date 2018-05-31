@@ -396,6 +396,22 @@ def split_data(df, target, features, test_size=0.2):
 	return x_train, x_test, y_train, y_test
 
 
+# CHOOSE CLASSIFIERS TO BE USED AND FIT DATA
+def classifier(model, num, x_train, y_train):
+	if model == 'DT':
+		clf = DecisionTreeClassifier(criterion='entropy', max_depth=num)
+	elif model == 'LR':
+		clf = LogisticRegression(penalty='l2')
+	elif model == 'RF':
+		clf = RandomForestClassifier(max_depth=num)
+	elif model == 'KNN':
+		clf = KNeighborsClassifier(n_neighbors=num)
+
+
+	fitted_clf = clf.fit(x_train, y_train)
+
+	return fitted_clf
+
 
 # PRINT OUT SENSIBLE SCORES OF A MODEL
 def evaluation(fitted_clf, x_test, y_test, save=False):
