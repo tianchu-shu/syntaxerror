@@ -99,3 +99,22 @@ def special_convert(df, cols, val1="t", val2="f"):
 
 	return df
 
+def processing_drop(df, drop_list, target_quantifier, value):
+	'''
+	1) Drops all rows where the variables in the drop_list value where the target is less than, greater than, or equal to a value.
+	Input:
+	df: A panda dataframe
+	drop_list: List of columns to act on
+	maximum: The integer to drop if the value is greater than
+	Outputs:
+	df
+	'''
+	for variable in drop_list:
+		if target_quantifier == 'equal':
+			df = df[df[variable] == value]
+		elif target_quantifier == 'greater':
+			df = df[df[variable] >= value]
+		elif target_quantifier == 'lesser':
+			df = df[df[variable] <= value]
+	
+	return df
