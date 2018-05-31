@@ -1,4 +1,6 @@
 from default_grids import *
+from datetime import *
+
 import sys
 import pandas as pd
 import numpy as np
@@ -136,13 +138,15 @@ def plot_df(df, columns, save=True):
 
 
 # PRINT COLUMNS WITH MISSING VALUES
-def missing_vals(df):
+def missing_vals(df, add_column=True):
 
 	# make new columns indicating what will be imputed
 	cols_with_missing = [col for col in df.columns if df[col].isnull().any()]
 
+
 	for col in cols_with_missing:
-		#df[col + '_was_missing'] = df[col].isnull()
+		if add_column:
+			df[col + '_was_missing'] = df[col].isnull()
 		print('{} has missing values'.format(col))
 
 	return cols_with_missing
@@ -181,6 +185,39 @@ def outliers_info(df, columns, threshold = 0.999, save=True):
 # PREPROCESSING #
 
 
+# CONVERT INTO DATETIME FORMAT
+def to_datetime(df, cols, index=-8, format="%Y%m%d"):
+    for col in cols:
+        df[col] = df[col].apply(lambda x: str(x)[:index])
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+        df[col] = pd.to_datetime(df[col], format=format)
+        
+    return df
+
+
+
+# CUTTING & MERGING DATAFRAME WITH DATETIME RANGE 
+def restrain_datetime(df, date_col='arrest_date', from_date=(2010,1,1), to_date=(2015,12,31)):
+	df.index = df[date_col]
+	df = df[datetime(*from_date):datetime(*to_date)]
+	df = df.reset_index(drop=True)
+
+	return df
+
+
+
+# FILTER WITH FREQUENCY OF RE-ENTRY
+def within_frame(df, id_num='mni_no', timestamp='release_date_y', duration=365):
+    df = df.sort_values(by=[id_num, timestamp])
+    df['re-enter-days'] = df.groupby(id_num)[timestamp].diff()
+    df['re-enter-days'] = df['re-enter-days'].apply(lambda x: x.days)
+    df['within_{}'.format(duration)] = np.where(df['re-enter-days']>duration, 1, 0)
+
+    
+    return df
+
+
+
 # FILL IN MISSING VALUES WITH SELECTED METHODS FOR EACH TYPE 
 def fill_missing(df, method="mean"):
 
@@ -189,7 +226,7 @@ def fill_missing(df, method="mean"):
 			try:
 				df[col].fillna(df[col].mode()[0], inplace=True)
 			except:
-				df[col].fillna("")
+				df[col].fillna("Missing")
 		elif df[col].dtype == 'int' or df[col].dtype == 'float':
 			if method == "mean":
 				df[col].fillna(df[col].mean(), inplace=True)
@@ -243,6 +280,7 @@ def special_convert(df, cols, val1="t", val2="f"):
 		df[col] = df[col].map({val1: 1, val2: 0})
 
 	return df
+    
 
 
 # ROUND VALUES OF GIVEN COLUMNS WITH SPECIFIED PLACE
