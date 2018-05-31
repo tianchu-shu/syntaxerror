@@ -43,7 +43,7 @@ def fill_missing(df, list_to_fill, operation_type, value = None):
 			df[variable].fillna(df[variable].mean(), inplace=True)
 		elif operation_type == 'median':
 			df[variable].fillna(df[variable].median(), inplace=True)
-        elif operation_type == 'mode':
+        	elif operation_type == 'mode':
 			df[variable].fillna(df[variable].mode(), inplace=True)
 		elif operation_type == 'set':
 			df[variable].fillna(value, inplace=True)
