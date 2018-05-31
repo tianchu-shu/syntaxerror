@@ -172,3 +172,19 @@ def bin_gen(df, variable, label, fix_value):
 	df.drop([variable], inplace = True, axis=1)
 	
 	return df
+
+
+def dummy_variable(variable, df):
+	'''
+	Using the binned columns, replace them with dummy columns.
+	Inputs:
+	df: A panda dataframe
+	variable: A list of column headings for binned variables
+	Outputs:
+	df:A panda dataframe
+	'''
+	dummy_df = pd.get_dummies(df[col]).rename(columns = lambda x: str(variable)+ str(x))
+	df = pd.concat([df, dummy_df], axis=1)
+	df.drop([variable], inplace = True, axis=1)
+	
+	return df
