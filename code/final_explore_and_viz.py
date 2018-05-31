@@ -26,3 +26,24 @@ def basic_exploring (dataframe):
         
         
   
+def corr_matrix(df):
+    '''
+    Creates a heatmap that shows the correlations between the different variables in a dataframe.
+    
+    Input:
+        df: a dataframe
+        title: name of the correlation_matrix
+        
+    Return:
+        Outputs a heatmatrix showing correlations
+    
+    
+    '''
+    f, ax = plt.subplots(figsize=(10, 8))
+    corr = df.corr()
+    sns.heatmap(corr, 
+                xticklabels=corr.columns.values,
+                yticklabels=corr.columns.values, 
+                mask=np.zeros_like(corr, dtype=np.bool), 
+                cmap=sns.diverging_palette(220, 10, as_cmap=True),
+            square=True, ax=ax)
