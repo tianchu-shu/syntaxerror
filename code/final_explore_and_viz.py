@@ -89,3 +89,63 @@ def plotting_curves (dataframe, feature):
 
 	return graph
 
+
+def splitting_across_variable(dataframe, feature):
+    '''
+    For a given dataframe and feature,
+        it splits the database as per the values of the feature,
+        and gives aggregrate information for that feature and
+        how it relates to other features
+        
+    Input:
+        dataframe
+        
+    Output: 
+        dataframe
+    '''
+    return dataframe.groupby([feature]).mean().transpose()
+
+
+def value_counter (dataframe, feature):
+    '''
+    Given a dataframe, and feature,
+        gives the number of occurrences of each value in that feature column
+        
+    Input:
+        dataframe
+        feature: string
+    
+    Output: dataframe
+    '''
+    return dataframe[feature].value_counts()
+
+
+def comparing_two_features(dataframe, feature_1, feature_2):
+    '''
+    Given a dataframe, and two features,
+        does a cross tab and shows values across those two corresponding features
+        
+    Input:
+        dataframe
+        feature_1, feature_2: string
+        
+    Output: 
+        dataframe
+        
+    '''
+    return pd.crosstab(dataframe[feature_1], dataframe[feature_2])
+
+
+def plotting_two_feature_comparison(dataframe, x_feature, y_feature):
+    '''
+    Given a dataframe and two features,
+        plots a graph across those two features
+        
+    Input:
+        dataframe
+        x_feature, y_feature: string
+        
+    Output:
+        matplotlib.axes._subplots.AxesSubplot
+    '''
+    return dataframe[[x_feature, y_feature]].groupby(x_feature).sum().plot()
