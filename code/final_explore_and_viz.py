@@ -47,3 +47,24 @@ def corr_matrix(df):
                 mask=np.zeros_like(corr, dtype=np.bool), 
                 cmap=sns.diverging_palette(220, 10, as_cmap=True),
             square=True, ax=ax)
+
+    
+    
+def plotting_curves (dataframe, feature):
+    '''
+    Given a dataframe, a column name, 
+        displays a plot of that dataframe column distribution.
+        
+    Input:
+        dataframe
+        feature: column name (string)
+        
+    Return:
+        displays a distribution of that variable
+        
+    Inspired by:
+        https://seaborn.pydata.org/generated/seaborn.distplot.html
+    '''
+    title = feature + ' Graph'
+    ax = sns.distplot(dataframe[feature])
+    ax.set_title(title)
