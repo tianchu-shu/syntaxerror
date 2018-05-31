@@ -52,7 +52,7 @@ class Connect():
 			print("Query Execution Failed, Rolling Back")
 			self.conn.rollback()
 			
-	def print_df(self, type, input_string):
+	def return_df(self, type, input_string):
 		if self.conn.closed == 0:
 			try:
 				if type = 'table':
