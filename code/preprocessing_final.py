@@ -132,3 +132,43 @@ def round_to(df, cols=None, digit=0):
 	print('given columns are rounded to {}'.format(digit))
 
 	return df
+
+def bin_gen(df, variable, label, fix_value):
+	'''
+	Create a bin column for a given variable, derived by using the 
+	description of the column to determine the min, 25, 50, 75 and max
+	of the column. Then categorize each value in the original variable's
+	column in the new column, labeled binned_<variable>, with 1,2,3,4
+	Ranging from min to max
+	Inputs:
+	df: A panda dataframe
+	variable: A string, which is a column in df
+	label: A string
+	fix_value: Either prefix or suffix
+	Outputs:
+	df: A panda dataframe
+	'''
+	variable_min = df[variable].min()
+	variable_25 = df[variable].quantile(q = 0.25)
+	variable_50 = df[variable].quantile(q = 0.50)
+	variable_75 = df[variable].quantile(q = 0.75)
+	variable_max = df[variable].max()
+	
+	bin = [variable_min, variable_25, variable_50, variable_75, variable_max]
+	unique_values = len(set(bin))
+	
+	label_list = []
+	iterator = 0
+	for x in range(1, unique_values):
+		iterator += 1
+		label_list.append(iterator)
+	
+	if fix_value == 'prefix':
+		bin_label = label + variable
+	elif fix_value == 'suffix':
+		bin_label = variable + label
+	
+	df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list, duplicates = 'drop')
+	df.drop([variable], inplace = True, axis=1)
+	
+	return df
