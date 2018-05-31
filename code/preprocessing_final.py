@@ -28,30 +28,24 @@ def checking_for_nulls(dataframe):
     
     
     
-    
-    
-def  Fill_in(df,  cols, method="mean"):
-         ''''''
-     Filling in missing values with "mean" or "median"  
-    
-    Inputs:
-        df: (pandas dataframe)
-        a list of those column names
-        method (string): mean or median
- 
-    Returns:
-        pandas dataframe
-    '''
-    for col in cols:
-        if method =='mean':
-            val = df[col].mean()
-        elif method =='median':
-            val = df[col].median()
-        elif method =='mode':
-            val = df[col].mode()
-            val = str(val)
-        elif method == 'missing':
-            val = "missing"
-        df[col] = df[col].fillna(val)
-        print ('Filling missing value for {} using {}'.format(col, method))
-    return df
+def fill_missing(df, list_to_fill, operation_type, value = None):
+	'''
+	Fill in null values with the mean, median or a set value of the column.
+	Input:
+	df: A panda dataframe
+	list_to_mean: List of columns to act on
+	Outputs:
+	df
+	'''
+	
+	for variable in list_to_mean:
+		if operation_type == 'mean':
+			df[variable].fillna(df[variable].mean(), inplace=True)
+		elif operation_type == 'median':
+			df[variable].fillna(df[variable].median(), inplace=True)
+        elif operation_type == 'mode':
+			df[variable].fillna(df[variable].mode(), inplace=True)
+		elif operation_type == 'set':
+			df[variable].fillna(value, inplace=True)
+	
+	return df
