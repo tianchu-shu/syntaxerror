@@ -68,3 +68,24 @@ def plotting_curves (dataframe, feature):
     title = feature + ' Graph'
     ax = sns.distplot(dataframe[feature])
     ax.set_title(title)
+    
+    def create_graph(df, variable, subject_variable, type = 'mean', graph_type = 'line'):
+	'''
+	Take a variable and create a line chart mapping that variable
+	against a dependent_variable, serious delinquency in the prior two years
+	Inputs:
+	df: A panda dataframe
+	variable: A string, which is a column in df
+	Outputs:
+	Variable_chart: A matplotlib object of the resultant chart
+	'''
+	columns = [subject_variable, variable]
+	if type == 'mean':
+		var_plot = df[columns].groupby(subject_variable).mean()
+	elif type == 'total':
+		var_plot = df[columns].groupby(subject_variable).sum()
+	
+	graph = var_plot.plot(kind = graph_type, use_index = False, figsize = (10,5))
+
+	return graph
+
