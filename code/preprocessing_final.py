@@ -30,7 +30,7 @@ def checking_for_nulls(dataframe):
     
     
     
-def  Fill_in(df,  colscols, method="mean"):
+def  Fill_in(df,  cols, method="mean"):
          ''''''
      Filling in missing values with "mean" or "median"  
     
