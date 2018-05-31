@@ -13,13 +13,14 @@ class Connect():
 		self.connect_to()
 	
 
-	def connect_to(self):
+	def load_params(self, filepath = 'params.json'):
+		with open(filepath, 'r') as file:
+			params = json.load(file)
 		
-		params = {'dbname': 'jocodssg',
-			'user': 'jocodssg_students',
-			'host': 'postgres.dssg.io',
-			'password': 'aibaecighoobeeba',
-			'port': 5432}
+		return params
+	
+	def connect_to(self):
+		params = self.load_params()
 
 		try:
 			self.conn = psycopg2.connect(**params)
@@ -46,7 +47,7 @@ class Connect():
 
 	def run_query(self, query):
 		try:
-			self.cur.execute(query)
+			self.cur.executre(query)
 		except:
 			print("Query Execution Failed, Rolling Back")
 			self.conn.rollback()
@@ -54,9 +55,9 @@ class Connect():
 	def print_df(self, type, input_string):
 		if self.conn.closed == 0:
 			try:
-				if type == 'table':
+				if type = 'table':
 					df = pd.read_sql_table(input_string, self.conn)
-				elif type == 'query':
+				elif type = 'query':
 					df = pd.read_sql_query(input_string, self.conn)
 				else:
 					df = None
