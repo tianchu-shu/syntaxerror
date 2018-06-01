@@ -13,6 +13,8 @@ from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import svm
 
+MODELS = ['RF', 'ET', 'AB', 'LR', 'SVM', 'GB', 'NB', 'DT', 'SGD', 'KNN']
+
 CLFS = {'RF': RandomForestClassifier(n_estimators=50, n_jobs=-1),
         'ET': ExtraTreesClassifier(n_estimators=10, n_jobs=-1, criterion='entropy'),
         'AB': AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), algorithm="SAMME", n_estimators=200),
