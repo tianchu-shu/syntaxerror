@@ -24,7 +24,7 @@ def restrain_datetime(df, date_col='arrest_date', from_date=(2010,1,1), to_date=
 
 
 # FILTER WITH FREQUENCY OF RE-ENTRY
-def within_frame(df, id_num='mni_no', timestamp='release_date_y', col_name='re-enter-days', duration=365):
+def within_frame(df, id_num='dedupe_id', timestamp='booking_date', col_name='re-entry', duration=365):
 	df = df.sort_values(by=[id_num, timestamp])
 	df['{}'.format(col_name)] = df.groupby(id_num)[timestamp].diff()
 	df['{}'.format(col_name)] = df['{}'.format(col_name)].apply(lambda x: x.days)
