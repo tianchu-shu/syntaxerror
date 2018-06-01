@@ -1,0 +1,13 @@
+B19301_001E = Per capita income in the past 12 months (in 2010 inflation-adjusted dollars)
+B17021_001E = Poverty Status of Individuals in the Past 12 Months by Living Arrangement
+B19001_001E = Household Income
+B25087_001E = Mortgage Status and Selected Monthly Owner Costs for Owner-Occupied Housing Units
+B14005_001E = Sex By School Enrollment By Educational Attainment By Employment Status For The Population 16 To 19 Years
+B09002_001E = OWN CHILDREN UNDER 18 YEARS BY FAMILY TYPE AND AGE
+B19056_001E = Supplemental Security Income (SSI) for Households
+B99104_001E = Imputation of Length of Time Grandparent Responsible for Own Grandchildren Under 18 Yrs for the Pop. 30+ Yrs in Hhld
+B21002_001E = PERIOD OF MILITARY SERVICE FOR CIVILIAN VETERANS 18 YEARS AND OVER
+B15002_001E = Sex by Educational Attainment for the Population 25 Years and over
+B25075_001E = Value for Owner-Occupied Housing Units
+B19059_001E = Retirement Income for Households
+B25070_001E = Gross Rent as a Percentage of Household Income
