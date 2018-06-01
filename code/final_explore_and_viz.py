@@ -69,25 +69,25 @@ def plotting_curves (dataframe, feature):
     ax = sns.distplot(dataframe[feature])
     ax.set_title(title)
     
-    def create_graph(df, variable, subject_variable, type = 'mean', graph_type = 'line'):
-	'''
-	Take a variable and create a line chart mapping that variable
-	against a dependent_variable, serious delinquency in the prior two years
-	Inputs:
-	df: A panda dataframe
-	variable: A string, which is a column in df
-	Outputs:
-	Variable_chart: A matplotlib object of the resultant chart
-	'''
-	columns = [subject_variable, variable]
-	if type == 'mean':
-		var_plot = df[columns].groupby(subject_variable).mean()
-	elif type == 'total':
-		var_plot = df[columns].groupby(subject_variable).sum()
-	
-	graph = var_plot.plot(kind = graph_type, use_index = False, figsize = (10,5))
+def create_graph(df, variable, subject_variable, type = 'mean', graph_type = 'line'):
+    '''
+    Take a variable and create a line chart mapping that variable
+    against a dependent_variable, serious delinquency in the prior two years
+    Inputs:
+    df: A panda dataframe
+    variable: A string, which is a column in df
+    Outputs:
+    Variable_chart: A matplotlib object of the resultant chart
+    '''
+    columns = [subject_variable, variable]
+    if type == 'mean':
+        var_plot = df[columns].groupby(subject_variable).mean()
+    elif type == 'total':
+        var_plot = df[columns].groupby(subject_variable).sum()
+    
+    graph = var_plot.plot(kind = graph_type, use_index = False, figsize = (10,5))
 
-	return graph
+    return graph
 
 
 def splitting_across_variable(dataframe, feature):
@@ -155,21 +155,21 @@ def plotting_two_feature_comparison(dataframe, x_feature, y_feature):
 # BAR PLOT
 def plot_df(df, columns, save=True):
 
-	for col in columns:
-		count_column = df[col].value_counts()
-		plt.figure(figsize=(len(count_column), 5))
-		column_figure = sns.barplot(count_column.index, count_column.values, alpha=0.8)
-		plt.title('{} values'.format(col))
-		plt.ylabel('Number of Counts', fontsize=12)
-		plt.xlabel(col, fontsize=12) 
-		
-		if save: 
-			column_figure.figure.savefig('{}.png'.format(col))
-			print('figure is saved as a file ~.png')
-		else:
-			plt.show()
+    for col in columns:
+        count_column = df[col].value_counts()
+        plt.figure(figsize=(len(count_column), 5))
+        column_figure = sns.barplot(count_column.index, count_column.values, alpha=0.8)
+        plt.title('{} values'.format(col))
+        plt.ylabel('Number of Counts', fontsize=12)
+        plt.xlabel(col, fontsize=12) 
+        
+        if save: 
+            column_figure.figure.savefig('{}.png'.format(col))
+            print('figure is saved as a file ~.png')
+        else:
+            plt.show()
 
-	return None
+    return None
 
 def counting_uniques(df):
     '''
@@ -187,7 +187,7 @@ def counting_in_a_variable(feature, df):
     '''
     print (df[feature].value_counts())
 
-	
+    
 def making_pie (df, feature):
     '''
     Gives a pie plot of data in any feature
@@ -201,4 +201,4 @@ def making_pie (df, feature):
     else:
         print (' ')
 
-	
+    
