@@ -15,24 +15,6 @@ import matplotlib.pyplot as plt
 import time
 import seaborn as sns
 
-clfs = {'RF': RandomForestClassifier(),
-    'Boost': AdaBoostClassifier(DecisionTreeClassifier(max_depth=1)),
-    'Logit': LogisticRegression(),
-    'SVM': SVC(probability=True, random_state=0),
-    'Tree': DecisionTreeClassifier(),
-    'Bag': BaggingClassifier(),
-    'KNN': KNeighborsClassifier() 
-    }
-    
-small_grid = {'RF':{'n_estimators': [10,100], 'max_depth': [5,50], 'max_features': ['sqrt','log2'],'min_samples_split': [2,10]},
-    'Boost': {'algorithm': ['SAMME', 'SAMME.R'], 'n_estimators': [1,10,100,1000]},
-    'Logit': {'penalty': ['l1','l2'], 'C': [0.001,0.01,0.1,1,10]},
-    'SVM' :{'C' :[0.01,0.1,1,10],'kernel':['linear']},
-    'Tree': {'criterion': ['gini', 'entropy'], 'max_depth': [5,10,20,50], 'max_features': ['sqrt','log2'],'min_samples_split': [2,5]},
-    'Bag':{'n_estimators':[1,10,20,50], 'max_samples':[5,10], 'max_features': [5,10]},
-    'KNN' :{'n_neighbors': [1,10,50,100],'weights': ['uniform','distance'],'algorithm': ['auto','ball_tree','kd_tree']}
-    }
-
 
 def generate_binary_at_k(y_scores, k):
     '''
