@@ -172,3 +172,10 @@ def temporal_eval(target, features, df, col, save=True):
 				result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
 			test_end_time -= relativedelta(months=+UPDATE)
 
+def extract_train_test_sets(df, col, train_start, train_end, test_start, test_end):
+
+	train_set = df[(train_start <= df[col]) & (df[col]<= train_end)]
+	test_set = df[(test_start <= df[col]) & (df[col]<=test_end)]
+
+	return train_set, test_set
+
