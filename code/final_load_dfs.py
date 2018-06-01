@@ -1,3 +1,5 @@
+import pandas as pod
+
 def load_from_file(dataframe_string, row_num = None):
 	'''
 	Function reads the .csv file into a panda dataframe.
