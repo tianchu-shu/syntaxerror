@@ -1,4 +1,4 @@
-import pandas as pod
+import pandas as pd
 
 def load_from_file(dataframe_string, row_num = None):
 	'''
