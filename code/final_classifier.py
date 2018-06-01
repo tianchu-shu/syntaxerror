@@ -1,4 +1,5 @@
 #Modified based on Rayid's magic loop
+from final_default_grids import * 
 
 import pandas as pd
 import numpy as np
@@ -67,7 +68,7 @@ def clf_loop(models_to_run, X, y):
     results_df = pd.DataFrame(columns=('model_type','parameters', 'accuracy','auc-roc', 'auc-pr', 'time', 'precision,recall,f1 at_5',
      'precision,recall,f1 at_10', 'precision,recall,f1 at_20'))
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=100)
-    for index,clf in enumerate([clfs[x] for x in models_to_run]):
+    for index,clf in enumerate([CLFS[x] for x in models_to_run]):
         parameter_values = small_grid[models_to_run[index]]
         for p in ParameterGrid(parameter_values):
             try:
