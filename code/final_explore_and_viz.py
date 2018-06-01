@@ -18,7 +18,7 @@ def basic_exploring (dataframe):
     print (df.head(), '\n \n \n')
     print ('DATASET TAIL \n')
     print (df.tail(), '\n \n \n')
-    
+
     for column in df.columns:
         plotting_curves (df, column)
         plt.show()
@@ -170,33 +170,6 @@ def plot_df(df, columns, save=True):
 			plt.show()
 
 	return None
-
-
-
-def explore(df, var,  y = 'bail_amt'):
-    '''
-    Generate distribution graph for specific variable
-    Input:
-        df: pd dataframe
-        variable(string): the variable/attribute you want to explore
-        graph_typee(string): the type of graph you want to draw
-    Return:
-        a graph for a selected attribute. 
-    '''
-    
-    var_sum = df[[var, y]].groupby(var).sum()
-    var_sum.dropna(axis=0, how='all')
-    
-    var_mean = df[[var, y]].groupby(var).mean()
-    var_mean.dropna(axis=0, how='all')
-    
-    var_sum.plot(kind='bar', figsize=(8,4), color = 'purple')
-    var_mean.plot(kind='line', figsize=(8,4), color = 'green', marker='o', linestyle='--')
-    
-    plt.title('mean by '+str(var))
-    plt.show()
-
-
 
 def counting_uniques(df):
     '''
