@@ -57,42 +57,44 @@ def plot_precision_recall(y_true, y_prob, model, p):
     plt.show()
 
 
-def clf_loop(models_to_run, X, y):
-    '''
-    Given the classifiers to test, run with parameters from the small_grid.
-    Records metrics in a Dataframe:
-        accuracy, AUC of ROC curve and PR curve,
-        time used,
-        precision, recall, and f1 scores at k = 5, 10, or 20.
-    '''
-    results_df = pd.DataFrame(columns=('model_type','parameters', 'accuracy','auc-roc', 'auc-pr', 'time', 'precision,recall,f1 at_5',
-     'precision,recall,f1 at_10', 'precision,recall,f1 at_20'))
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=100)
-    for index,clf in enumerate([CLFS[x] for x in models_to_run]):
-        parameter_values = small_grid[models_to_run[index]]
-        for p in ParameterGrid(parameter_values):
+def classifiers_loop(x_train, x_test, y_train, y_test, save=True):
+    results_df =  pd.DataFrame(columns=('model_type','clf', 'parameters', 'auc-roc', 'precision_5', 'accuracy_5', 'recall_5', 'f1_5',
+                                                       'precision_10', 'accuracy_10', 'recall_10', 'f1_10',
+                                                       'precision_20', 'accuracy_20', 'recall_20', 'f1_20',
+                                                       'precision_30', 'accuracy_30', 'recall_30', 'f1_30',
+                                                       'precision_50', 'accuracy_50', 'recall_50', 'f1_50'))
+    for i, clf in enumerate([CLFS[x] for x in MODELS_TO_RUN]):
+        print(MODELS_TO_RUN[i])
+        params = GRID[MODELS_TO_RUN[i]]
+        number = 1
+        for p in ParameterGrid(params):
             try:
-                start = time.time()
                 clf.set_params(**p)
-                y_pred_probs = clf.fit(X_train, y_train).predict_proba(X_test)[:,1]
-                accuracy = clf.score(X_test, y_test)
-                end = time.time()
-
-                #Zip, unzip to ensure corresponding order
+                y_pred_probs = clf.fit(x_train, y_train).predict_proba(x_test)[:,1]
                 y_pred_probs_sorted, y_test_sorted = zip(*sorted(zip(y_pred_probs, y_test), reverse=True))
-
-                results_df.loc[len(results_df)] = [models_to_run[index], p, accuracy,
-                                                    roc_auc_score(y_test, y_pred_probs),
-                                                    average_precision_score(y_test, y_pred_probs), end-start,
-                                                    scores_at_k(y_test_sorted,y_pred_probs_sorted,5.0),
-                                                    scores_at_k(y_test_sorted,y_pred_probs_sorted,10.0),
-                                                    scores_at_k(y_test_sorted,y_pred_probs_sorted,20.0)]
-
-                plot_precision_recall(y_test,y_pred_probs,models_to_run[index],p)
-
+                print(p)
+                accuracy_5, precision_5, recall_5, f1_5 = evals_at_k(y_test_sorted,y_pred_probs_sorted,5.0)
+                accuracy_10, precision_10, recall_10, f1_10 = evals_at_k(y_test_sorted,y_pred_probs_sorted,10.0)
+                accuracy_20, precision_20, recall_20, f1_20 = evals_at_k(y_test_sorted,y_pred_probs_sorted,20.0)
+                accuracy_30, precision_30, recall_30, f1_30 = evals_at_k(y_test_sorted,y_pred_probs_sorted,30.0)
+                accuracy_50, precision_50, recall_50, f1_50 = evals_at_k(y_test_sorted,y_pred_probs_sorted,50.0)
+                results_df.loc[len(results_df)] = [MODELS_TO_RUN[i], clf, p,
+                                                       roc_auc_score(y_test, y_pred_probs),
+                                                       accuracy_5, precision_5, recall_5, f1_5,
+                                                       accuracy_10, precision_10, recall_10, f1_10,
+                                                       accuracy_20, precision_20, recall_20, f1_20,
+                                                       accuracy_30, precision_30, recall_30, f1_30,
+                                                       accuracy_50, precision_50, recall_50, f1_50]
+                #plot_precision_recall_n(y_test,y_pred_probs,MODELS_TO_RUN[i]+str(number))
+                #plot_roc(clf, y_test,y_pred_probs)
+                number += 1
             except IndexError as e:
-                print('Error:',e)
-                continue
+                    print(e)
+                    continue
+
+    if save:
+    	results_df.to_csv('results.csv', index=False)
+
     return results_df
 
 # FEATURE IMPORTANCES 
