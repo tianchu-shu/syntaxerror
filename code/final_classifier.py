@@ -1,4 +1,3 @@
-#Tianchu Shu
 #Modified based on Rayid's magic loop
 
 import pandas as pd
@@ -111,3 +110,65 @@ def clf_loop(models_to_run, X, y):
                 print('Error:',e)
                 continue
     return results_df
+
+# FEATURE IMPORTANCES 
+def feature_importance(clf, model, save=False):
+
+	if FEATURE_CLFS[model] == 'feature_importances':
+		importances = clf.feature_importances_
+
+	if FEATURE_CLFS[model] == 'coef':
+		importances = clf.coef.tolist()
+
+
+	data = list(importances)
+	features_df = pd.DataFrame(data, columns=['importance'], index=X.columns)
+	sorted_features = features_df.sort_values(by='importance', ascending=0)
+
+	plt.figure(figsize=(15,6))
+	top15 = sorted_features.head(15)
+	features_figure = sns.barplot(top15.index, top15.values.flatten(), alpha=0.8)
+	plt.title('{} Importance of Features'.format(model))
+	plt.ylabel('Importance Value', fontsize=12)
+	plt.xlabel('Features', fontsize=12)
+	plt.xticks(rotation = 90)
+
+
+	if save:
+		sorted_features.to_csv('{}.csv'.format(model))
+		print("List of features is saved as ~.csv")
+
+		features_figure.figure.savefig('{}.png'.format(model))
+		print('Figure is saved as a file {}_features.png'.format(model))
+	else:
+		print(sorted_features)
+		plt.show()
+
+	return None
+
+
+# TEMPORAL HOLDOUTS
+def temporal_eval(target, features, df, col, save=True):
+
+	start_time_date = datetime.strptime(START, '%Y-%m-%d')
+	end_time_date = datetime.strptime(END, '%Y-%m-%d')
+
+	for window in WINDOWS:
+		test_end_time = end_time_date
+		while (test_end_time >= start_time_date + 2 * relativedelta(months=+window)):
+			test_start_time = test_end_time - relativedelta(months=+window)
+			train_end_time = test_start_time  - relativedelta(days=+1) # minus 1 day
+			train_start_time = train_end_time - relativedelta(months=+window)
+			while (train_start_time >= start_time_date):
+				print (train_start_time,train_end_time,test_start_time,test_end_time, window)
+				train_start_time -= relativedelta(months=+window)
+				# call function to get data
+				train_set, test_set = extract_train_test_sets(df, col, train_start_time, train_end_time, test_start_time, test_end_time)
+				# fit on train data
+				x_train, x_test = train_set[features], test_set[features]
+				y_train, y_test = train_set[target], test_set[target]
+				# predict on test data
+				result = classifiers_loop(x_train, x_test, y_train, y_test)
+				result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
+			test_end_time -= relativedelta(months=+UPDATE)
+
