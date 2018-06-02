@@ -30,13 +30,12 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm = best):
                 pct_above_per_thresh = np.array(pct_above_per_thresh)
                 
                 ax1.plot(pct_above_per_thresh, precision_curve, c=colors[color_index])
-                color_index += 1
-                ax2.plot(pct_above_per_thresh, recall_curve, c=colors[color_index])
-                if color_index == 7:
-                    color_index = 0
-                
-                
+                ax2.plot(pct_above_per_thresh, recall_curve, c=colors[color_index])                
             except IndexError as e:
                 print(e)
                 continue
+        color_index += 1
+        if color_index >= 7:
+            color_index = 0
+    ax1.legend(models)
     plt.show()
