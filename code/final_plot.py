@@ -3,11 +3,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Build a forest and compute the feature importances
-def feature_importance():
+def feature_importance(x_train, y_train):
   forest = ExtraTreesClassifier(n_estimators=100, max_depth=5, criterion='entropy', min_samples_split=10, n_jobs=-1,
                                 random_state=0)
 
-  forest.fit(x_train, y_train2)
+  forest.fit(x_train, y_train)
   importances = forest.feature_importances_
   std = np.std([tree.feature_importances_ for tree in forest.estimators_],
                axis=0)
