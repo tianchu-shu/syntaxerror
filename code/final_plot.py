@@ -3,32 +3,33 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Build a forest and compute the feature importances
-forest = ExtraTreesClassifier(n_estimators=100, max_depth=5, criterion='entropy', min_samples_split=10, n_jobs=-1,
-                              random_state=0)
+def feature_importance():
+  forest = ExtraTreesClassifier(n_estimators=100, max_depth=5, criterion='entropy', min_samples_split=10, n_jobs=-1,
+                                random_state=0)
 
-forest.fit(x_train, y_train2)
-importances = forest.feature_importances_
-std = np.std([tree.feature_importances_ for tree in forest.estimators_],
-             axis=0)
-indices = np.argsort(importances)[::-1]
-indices = indices[:10]
+  forest.fit(x_train, y_train2)
+  importances = forest.feature_importances_
+  std = np.std([tree.feature_importances_ for tree in forest.estimators_],
+               axis=0)
+  indices = np.argsort(importances)[::-1]
+  indices = indices[:10]
 
-# Print the feature ranking
-print("Feature ranking:")
+  # Print the feature ranking
+  print("Feature ranking:")
 
-labels = []
-for f in range(len(indices)):
-    label = indepv[indices[f]]
-    labels.append(label)
-    print("%d. %s (%f)" % (f+1, label, importances[indices[f]]))
-    
-# Plot the feature importances of the forest
-plt.figure()
-plt.title("Feature importances")
-plt.bar(range(len(indices)), importances[indices], align="center", tick_label = labels_arr, color=palette(range(len(indices))))
-plt.xlim([-1, len(indices)])
-plt.xticks(range(len(indices)),labels, rotation = 'vertical')
-plt.show()
+  labels = []
+  for f in range(len(indices)):
+      label = indepv[indices[f]]
+      labels.append(label)
+      print("%d. %s (%f)" % (f+1, label, importances[indices[f]]))
+
+  # Plot the feature importances of the forest
+  plt.figure()
+  plt.title("Feature importances")
+  plt.bar(range(len(indices)), importances[indices], align="center", tick_label = labels_arr, color=palette(range(len(indices))))
+  plt.xlim([-1, len(indices)])
+  plt.xticks(range(len(indices)),labels, rotation = 'vertical')
+  plt.show()
 
 def plot_mult(models, x_train, x_test, y_train, y_test, bestm = best):
     '''
