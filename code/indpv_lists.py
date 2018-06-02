@@ -15,6 +15,7 @@ educ_var = ['school_enrollment_16-19_bin', 'education_25_bin']
 
 all_var = gender_var + mh_var + race_var + marital_var + crime_var + individual_var + bail_var + econ_var + educ_var
 mh_bail_var = mh_var + bail_var
+census_vars = individual_var + econ_var + educ_var
 
 trial_var = crime_var + bail_var
 personal_var = marital_var + individual_var + race_var
