@@ -42,7 +42,7 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     Run model with the best given params on x and y
     and print out all the best models' on the same graph
     '''
-    colors = "bgrcmykw"
+    colors = ['#FF0000', '#800000', '#FFFF00', '#808000', '#00FF00', ''#008000', '#00FFFF', '#008080', '#0000FF', '#000080', '#FF00FF', '#800080', '#FFFFFF', '#C0C0C0', '#808080', '#000000']
     color_index = 0
 
     fig, ax1 = plt.subplots()
@@ -74,7 +74,7 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
                 print(e)
                 continue
         color_index += 1
-        if color_index >= 7:
+        if color_index >= 15:
             color_index = 0
     ax1.legend(models)
     plt.show()
