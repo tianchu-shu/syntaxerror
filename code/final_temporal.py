@@ -55,3 +55,25 @@ def within_frame2(df, id='dedupe_id', col1='booking_date', col2='release_date', 
 
 
 	return df
+
+
+def temporal_split(df, time_col, start_time, mid_time, end_time):
+    train = df[(df[time_col] >= start_time) & (df[time_col] < mid_time) ]
+    test = df[(df[time_col] >= mid_time)  & (df[time_col] < end_time)]
+    train = train.drop([time_col], axis=1)
+    test = test.drop([time_col], axis=1)
+    return train, test
+
+
+def split_data(train, test, y):
+    '''
+    Split the data into training and testing set
+    
+    And save them to run try different models
+    '''
+    x_test = test[indepv] 
+    x_train = train[indepv]
+    y_test = test[y]
+    y_train = train[y]
+    
+    return x_train, x_test, y_train, y_test
