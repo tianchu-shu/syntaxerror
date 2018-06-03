@@ -9,7 +9,7 @@ crime_var = ['case_typeCR', 'case_typeDV', 'case_typeJV',
  'arresting_agencyOVERLAND PARK P.D.', 'arresting_agencyPRAIRIE VILLAGE P.D.', 'arresting_agencyROELAND PARK P.D.', 'arresting_agencySHAWNEE MISSION SCHOOL SECURITY',
  'arresting_agencySHAWNEE P.D.', 'arresting_agencySPRING HILL P.D.', 'arresting_agencyWESTWOOD P.D.', 'arresting_agency_typeCITY',
  'arresting_agency_typeCOUNTY PARK DISTRICT', 'arresting_agency_typeCOUNTY SHERIFF', 'arresting_agency_typeOTHER AGENCY', 'arresting_agency_typeSCHOOL', 'arresting_agency_typeSTATE']
-individual_var = [ 'own_children_under18_bin', 'grandparent_care_bin', 'military_service_bin',]
+individual_var = ['age', 'own_children_under18_bin', 'grandparent_care_bin', 'military_service_bin']
 bail_var = ['bailed_out', 'bail_typeCA', 'bail_typeGPS', 'bail_typeORCD', 'bail_typePR', 'bail_typeSUR', 'bail_amt_bin']
 econ_var = ['per_capita_income_bin', 'poverty_stat_bin', 'household_income_bin', 'mortgage_stat_bin', 'SSI_income_bin', 'property_value_occupied_bin', 'retirement_income_bin', 'rent_over_income_bin']
 educ_var = ['school_enrollment_16-19_bin', 'education_25_bin']
