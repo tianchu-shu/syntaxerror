@@ -3,19 +3,23 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-
-def feature_importance(x_train, y_train，k=10):
-    forest = ExtraTreesClassifier(n_estimators=100, max_depth=5, criterion='entropy', min_samples_split=10, n_jobs=-1,
-                                random_state=0)
-
-    forest.fit(x_train, y_train)
+def feature_importance(x_train, y_train, bestm, x="ET", k=10):
+    '''
+    Based on the best grid for each classifer, print out the 
+    top k important features
+    '''
+    clf = clfs[x]
+    for p in ParameterGrid(bestm[x]):
+        clf.set_params(**p)
+    forest = clf.fit(x_train, y_train)
+    
     importances = forest.feature_importances_
     current_palette = sns.color_palette(sns.color_palette("hls", 8))
     indices = np.argsort(importances)[::-1]
     indices = indices[:k]
 
     # Print the feature ranking
-    print("Feature ranking:")
+    print("Feature ranking for %s" % (y_train.name))
 
     labels_arr = []
     for f in range(len(indices)):
@@ -25,14 +29,14 @@ def feature_importance(x_train, y_train，k=10):
 
     # Plot the feature importances of the forest
     plt.figure()
-    plt.title("Feature importances")
+    plt.title("Feature importances for %s" % (y_train.name))
     plt.bar(range(len(indices)), importances[indices], align="center", tick_label = labels_arr, color= current_palette)
     plt.xlim([-1, len(indices)])
     plt.xticks(range(len(indices)),labels_arr, rotation = 'vertical')
     plt.show()
-  
-  
-
+    
+    
+ 
 def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     '''
     Run model with the best given params on x and y
@@ -76,14 +80,16 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     plt.show()
 
     
- #Printing out the best decision tree
-def print_tree(x_train, y_train, bestm, models=["Tree"]):
-    for index, clf in enumerate([clfs[x] for x in models]):
-        model_params = bestm[models[index]]
-        for p in ParameterGrid(model_params):
-            clf.set_params(**p)
-            tree = clf.fit(x_train, y_train)
-            tree_viz = export_graphviz(tree, out_file=None, feature_names=indepv, rounded=True, filled=True)
-            graph =graphviz.Source(tree_viz)
+#Printing out the best decision tree
+def print_tree(x_train, y_train, bestm):
+    '''
+    Based on the best grid for, print out the tree graph    
+    '''
+    clf = clfs["Tree"]
+    for p in ParameterGrid(bestm["Tree"]):
+        clf.set_params(**p)
+        tree = clf.fit(x_train, y_train)
+        tree_viz = export_graphviz(tree, out_file=None, feature_names=indepv, rounded=True, filled=True)
+        graph =graphviz.Source(tree_viz)
             
     return graph
