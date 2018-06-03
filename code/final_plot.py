@@ -30,11 +30,12 @@ def feature_importance(x_train, y_train):
   plt.xlim([-1, len(indices)])
   plt.xticks(range(len(indices)),labels, rotation = 'vertical')
   plt.show()
+  
 
-def plot_mult(models, x_train, x_test, y_train, y_test, bestm = best):
+def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     '''
     Run model with the best given params on x and y
-    and print out the scores for comparison
+    and print out all the best models' on the same graph
     '''
     colors = "bgrcmykw"
     color_index = 0
