@@ -171,6 +171,8 @@ def bin_gen(df, variable, label, fix_value):
     df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list, duplicates = 'drop')
     df.drop([variable], inplace = True, axis=1)
     
+    df = dummy_variable(bin_label, df)
+    
     return df
 
 
