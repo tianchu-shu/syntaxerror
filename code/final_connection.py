@@ -4,6 +4,14 @@ import pandas as pd
 import json
 import logging
 
+'''
+Class Function to access a SQL database. 
+
+connect_to: Opens a connection.
+close_connect: Closes a connection
+run_query: Runs a query on the database
+return_dfs: Returns either a query or a table as a pandas dataframe.
+'''
 
 class Connect():
 	def __init__(self):
