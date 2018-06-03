@@ -4,33 +4,6 @@ import matplotlib.pyplot as plt
 
 
 
-# Build a forest and compute the feature importances
-
-	data = list(importances)
-	features_df = pd.DataFrame(data, columns=['importance'], index=X.columns)
-	sorted_features = features_df.sort_values(by='importance', ascending=0)
-
-	plt.figure(figsize=(15,6))
-	top15 = sorted_features.head(15)
-	features_figure = sns.barplot(top15.index, top15.values.flatten(), alpha=0.8)
-	plt.title('{} Importance of Features'.format(model))
-	plt.ylabel('Importance Value', fontsize=12)
-	plt.xlabel('Features', fontsize=12)
-	plt.xticks(rotation = 90)
-
-
-	if save:
-		sorted_features.to_csv('{}.csv'.format(model))
-		print("List of features is saved as ~.csv")
-
-		features_figure.figure.savefig('{}.png'.format(model))
-		print('Figure is saved as a file {}_features.png'.format(model))
-	else:
-		print(sorted_features)
-		plt.show()
-
-	return None
-
 def feature_importance(x_train, y_train，k=10):
     forest = ExtraTreesClassifier(n_estimators=100, max_depth=5, criterion='entropy', min_samples_split=10, n_jobs=-1,
                                 random_state=0)
