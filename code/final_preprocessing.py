@@ -2,7 +2,7 @@
 Collection of pre-processing functions for ML Project
 31st May 2018
 '''
-
+import pandas as pd
 
 
 
