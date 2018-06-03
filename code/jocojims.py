@@ -4,7 +4,7 @@ DATE_COLS = ['booking_date', 'release_date']
 
 ACS_DROP = ['latitude', 'longitude', 'fips']
 DROP_COLS = ['re_entry', 'mni_no', 'dedupe_id', 'dob', 'state', 'city',  'zip', 'release_date', 'case_no', 'booking_no', 'pri_dx_value',
-       'refferal_source']
+       'refferal_source', 'after_released']
 
 DUMMIES = ['sex', 'race','mar_stat', 'case_type', 'arresting_agency', 'arresting_agency_type', 'bail_type' ]
 
