@@ -75,3 +75,16 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
             color_index = 0
     ax1.legend(models)
     plt.show()
+
+    
+ #Printing out the best decision tree
+def print_tree(x_train, y_train, bestm, models=["Tree"]):
+    for index, clf in enumerate([clfs[x] for x in models]):
+        model_params = bestm[models[index]]
+        for p in ParameterGrid(model_params):
+            clf.set_params(**p)
+            tree = clf.fit(x_train, y_train)
+            tree_viz = export_graphviz(tree, out_file=None, feature_names=indepv, rounded=True, filled=True)
+            graph =graphviz.Source(tree_viz)
+            
+    return graph
