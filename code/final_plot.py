@@ -1,6 +1,7 @@
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+from random import randint
 
 
 def feature_importance(x_train, y_train, bestm, x="ET", k=10):
@@ -37,12 +38,14 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     
     
  
-def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
+def plot_mult(models, x_train, x_test, y_train, y_test, bestm, no_color = len(models)):
     '''
     Run model with the best given params on x and y
     and print out all the best models' on the same graph
     '''
-    colors = ['#FF0000', '#800000', '#FFFF00', '#808000', '#00FF00', ''#008000', '#00FFFF', '#008080', '#0000FF', '#000080', '#FF00FF', '#800080', '#FFFFFF', '#C0C0C0', '#808080', '#000000']
+    colors = []
+    for i in range(no_color):
+        colors.append('%06X' % randint(0, 0xFFFFFF))
     color_index = 0
 
     fig, ax1 = plt.subplots()
@@ -74,7 +77,7 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
                 print(e)
                 continue
         color_index += 1
-        if color_index >= 15:
+        if color_index >= len(colors):
             color_index = 0
     ax1.legend(models)
     plt.show()
