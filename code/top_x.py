@@ -3,11 +3,14 @@ for row in best:
     models.append(row)
 
 
-def finding_risk_scores(models, x_train, x_test, y_train, y_test, grid=best):
+def finding_risk_scores(x_train, x_test, y_train, y_test, grid=best):
     '''
     Adds the y-pred probs for each model to the x_test
     Can be used to find top X% of people at risk according to any given model
     '''
+    models = []
+    for row in grid:
+        models.append(row)
     
     x_test_copy = x_test.copy()
     for index, clf in enumerate([clfs[x] for x in models]):
