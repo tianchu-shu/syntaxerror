@@ -19,6 +19,6 @@ mh_bail_var = mh_var + bail_var
 census_vars = individual_var + econ_var + educ_var
 
 trial_var = crime_var + bail_var
-personal_var = marital_var + individual_var + race_var
+personal_var = marital_var + individual_var + race_var + gender_var
 societal_var = econ_var + educ_var
 person_societal_var = personal_var + societal_var
