@@ -1,6 +1,4 @@
-models = []
-for row in best:
-    models.append(row)
+
 
 
 def finding_risk_scores(x_train, x_test, y_train, y_test, grid=best):
