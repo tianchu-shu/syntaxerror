@@ -1,7 +1,7 @@
 
 
 
-def finding_risk_scores(x_train, x_test, y_train, y_test, grid=best):
+def finding_risk_scores(x_train, x_test, y_train, y_test, grid):
     '''
     Adds the y-pred probs for each model to the x_test
     Can be used to find top X% of people at risk according to any given model
