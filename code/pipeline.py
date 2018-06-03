@@ -306,13 +306,21 @@ def plotting_top_10_bar_plot  (df, feature):
 
 # Classifiers
 
-def Split_Data(df, target, features, test_size = 0.2):
-    #X = df.drop([target], axis=1)
-    features = np.array(features)
-    X = df[features]
-    Y = df[target]
-    x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = test_size, random_state = 42)
+def split_data(train, test, y):
+    '''
+    Split the data into training and testing set
+    
+    And save them to run try different models
+    
+    y(str): the name of the target y
+    '''
+    x_test = test[indepv] 
+    x_train = train[indepv]
+    y_test = test[y]
+    y_train = train[y]
     return x_train, x_test, y_train, y_test
+
+
 
 def Classifier(model, num, x_train, y_train, x_test):
     if model == 'LR':
