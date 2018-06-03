@@ -1,4 +1,5 @@
 import pandas as pd
+import final_connection
 
 def load_from_file(dataframe_string, row_num = None):
 	'''
@@ -22,8 +23,12 @@ def load_from_file(dataframe_string, row_num = None):
 	return df
 
 def load_from_db(table_list):
+	'''
+	Utilize the connection function from final_connection to return a dictionary
+	of tables, converted to pandas DFs.
+	'''
 	df_dict = {}
-	conn = connection.Connect()
+	conn = final_connection.Connect()
 	for x in table_list:
 		file_name = x + "_df"
 		df_dict[file_name] = connection.return_df('table', x)
