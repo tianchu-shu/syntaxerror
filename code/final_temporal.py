@@ -71,8 +71,8 @@ def split_data(train, test, y):
     
     And save them to run try different models
     '''
-    x_test = test[indepv] 
-    x_train = train[indepv]
+    x_test = test
+    x_train = train
     y_test = test[y]
     y_train = train[y]
     
