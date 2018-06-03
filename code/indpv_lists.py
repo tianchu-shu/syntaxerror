@@ -1,5 +1,6 @@
+
 gender_var = ['sexFEMALE', 'sexMALE', 'sexmissing']
-mh_var = ['mh_treatment']
+mh_var = ['mh_treatment', 'pri_dx_value', 'refferal_source']
 race_var = ['raceAMERICAN INDIAN OR ALASKA NATIVE', 'raceASIAN', 'raceBLACK OR AFRICAN AMERICAN', 'raceWHITE']
 marital_var = ['mar_statA', 'mar_statD', 'mar_statM', 'mar_statN', 'mar_statS', 'mar_statU', 'mar_statW', 'mar_statY', 'mar_statmissing']
 crime_var = ['case_typeCR', 'case_typeDV', 'case_typeJV',
