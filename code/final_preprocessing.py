@@ -183,7 +183,7 @@ def dummy_variable(variable, df):
     Outputs:
     df:A panda dataframe
     '''
-    dummy_df = pd.get_dummies(df[col]).rename(columns = lambda x: str(variable)+ str(x))
+    dummy_df = pd.get_dummies(df[variable]).rename(columns = lambda x: str(variable)+ str(x))
     df = pd.concat([df, dummy_df], axis=1)
     df.drop([variable], inplace = True, axis=1)
     
