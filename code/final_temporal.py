@@ -40,6 +40,7 @@ def within_frame2(df, id='dedupe_id', col1='booking_date', col2='release_date', 
 	df[col2] = pd.to_datetime(df[col2])
 
 	df['after_prev_booked'] = df.groupby(id)[date_col].diff()
+	df['stayed'] = df['stayed'].shift(1)
 	df['stayed'] = df[col2] - df[col1]
 
 	df = df[df['after_prev_booked'].notnull()]
