@@ -3,6 +3,16 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from random import randint
 
+clfs = {'RF': RandomForestClassifier(),
+    'Boost': AdaBoostClassifier(DecisionTreeClassifier(max_depth=1)),
+    'Logit': LogisticRegression(),
+    'SVM': SVC(probability=True, random_state=0),
+    'Tree': DecisionTreeClassifier(),
+    'Bag': BaggingClassifier(),
+    'KNN': KNeighborsClassifier(),
+    'ET': ExtraTreesClassifier(n_estimators=10, n_jobs=-1, criterion='entropy'),
+    'NB': GaussianNB()}
+
 def bar_charts(results):
     for item in ['auc-roc','precision','time']:
         plt.figure()
