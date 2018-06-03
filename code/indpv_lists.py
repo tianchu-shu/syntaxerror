@@ -1,7 +1,7 @@
 gender_var = ['sexFEMALE', 'sexMALE', 'sexmissing']
 mh_var = ['mh_treatment']
 race_var = ['raceAMERICAN INDIAN OR ALASKA NATIVE', 'raceASIAN', 'raceBLACK OR AFRICAN AMERICAN', 'raceWHITE']
-marital_var = ['mar_statA', 'mar_statD', 'mar_statM', 'mar_statN', 'mar_statS', 'mar_statU', 'mar_statW', 'mar_statY']
+marital_var = ['mar_statA', 'mar_statD', 'mar_statM', 'mar_statN', 'mar_statS', 'mar_statU', 'mar_statW', 'mar_statY', 'mar_statmissing']
 crime_var = ['case_typeCR', 'case_typeDV', 'case_typeJV',
  'arresting_agencyFAIRWAY P.D.', 'arresting_agencyGARDNER P.D.', 'arresting_agencyJOHNSON COUNTY PARK PATROL', "arresting_agencyJOHNSON COUNTY SHERIFF'S DEPARTMENT", 'arresting_agencyKANSAS HIGHWAY PATROL', 'arresting_agencyLAKE QUIVIRA P.D.', 'arresting_agencyLEAWOOD P.D.',
  'arresting_agencyLENEXA P.D.', 'arresting_agencyMERRIAM P.D.', 'arresting_agencyMISSION P.D.', 'arresting_agencyOLATHE P.D.', 'arresting_agencyOTHER AGENCY',
