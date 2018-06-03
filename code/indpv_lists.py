@@ -9,10 +9,11 @@ crime_var = ['case_typeCR', 'case_typeDV', 'case_typeJV',
  'arresting_agencyOVERLAND PARK P.D.', 'arresting_agencyPRAIRIE VILLAGE P.D.', 'arresting_agencyROELAND PARK P.D.', 'arresting_agencySHAWNEE MISSION SCHOOL SECURITY',
  'arresting_agencySHAWNEE P.D.', 'arresting_agencySPRING HILL P.D.', 'arresting_agencyWESTWOOD P.D.', 'arresting_agency_typeCITY',
  'arresting_agency_typeCOUNTY PARK DISTRICT', 'arresting_agency_typeCOUNTY SHERIFF', 'arresting_agency_typeOTHER AGENCY', 'arresting_agency_typeSCHOOL', 'arresting_agency_typeSTATE']
-individual_var = ['age_bin', 'own_children_under18_bin', 'grandparent_care_bin', 'military_service_bin']
+individual_var = ['age_bin1', 'age_bin2', 'age_bin3', 'age_bin4', 'own_children_under18_bin1', 'own_children_under18_bin2', 'own_children_under18_bin3', 'own_children_under18_bin4',  'grandparent_care_bin1', 'grandparent_care_bin2', 'grandparent_care_bin3', 'grandparent_care_bin4','military_service_bin'1, 'military_service_bin'2, 'military_service_bin3', 'military_service_bin4']
 bail_var = ['bailed_out', 'bail_typeCA', 'bail_typeGPS', 'bail_typeORCD', 'bail_typePR', 'bail_typeSUR', 'bail_amt_bin']
-econ_var = ['per_capita_income_bin', 'poverty_stat_bin', 'household_income_bin', 'mortgage_stat_bin', 'SSI_income_bin', 'property_value_occupied_bin', 'retirement_income_bin', 'rent_over_income_bin']
-educ_var = ['school_enrollment_16-19_bin', 'education_25_bin']
+econ_var = ['per_capita_income_bin1', 'per_capita_income_bin2', 'per_capita_income_bin3', 'per_capita_income_bin4', 'poverty_stat_bin1', 'poverty_stat_bin2', 'poverty_stat_bin3', 'poverty_stat_bin4', 'household_income_bin1', 'household_income_bin2', 'household_income_bin3', 'household_income_bin4',
+            'mortgage_stat_bin1', 'mortgage_stat_bin2', 'mortgage_stat_bin3', 'mortgage_stat_bin4', 'SSI_income_bin1', 'SSI_income_bin2', 'SSI_income_bin3', 'SSI_income_bin4', 'property_value_occupied_bin1', 'property_value_occupied_bin2', 'property_value_occupied_bin3', 'property_value_occupied_bin4', 'retirement_income_bin1', 'retirement_income_bin2', 'retirement_income_bin3', 'retirement_income_bin4', 'rent_over_income_bin1', 'rent_over_income_bin2', 'rent_over_income_bin3', 'rent_over_income_bin4']
+educ_var = ['school_enrollment_16-19_bin1', 'school_enrollment_16-19_bin2', 'school_enrollment_16-19_bin3', 'school_enrollment_16-19_bin4', 'education_25_bin1', 'education_25_bin2', 'education_25_bin3', 'education_25_bin4']
 
 all_var = gender_var + mh_var + race_var + marital_var + crime_var + individual_var + bail_var + econ_var + educ_var
 mh_bail_var = mh_var + bail_var
