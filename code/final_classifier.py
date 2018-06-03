@@ -19,7 +19,7 @@ import datetime
 
 
 
-MODELS = ['RF', 'ET', 'AB', 'LR', 'SVM', 'GB', 'NB', 'DT', 'SGD', 'KNN']
+MODELS_TO_RUN = ['RF', 'ET', 'AB', 'LR', 'SVM', 'GB', 'NB', 'DT', 'SGD', 'KNN']
 
 CLFS = {'RF': RandomForestClassifier(n_estimators=50, n_jobs=-1),
         'ET': ExtraTreesClassifier(n_estimators=10, n_jobs=-1, criterion='entropy'),
