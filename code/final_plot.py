@@ -38,13 +38,13 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     
     
  
-def plot_mult(models, x_train, x_test, y_train, y_test, bestm, no_color = len(models)):
+def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     '''
     Run model with the best given params on x and y
     and print out all the best models' on the same graph
     '''
     colors = []
-    for i in range(no_color):
+    for i in range(len(models)):
         colors.append('%06X' % randint(0, 0xFFFFFF))
     color_index = 0
 
