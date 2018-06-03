@@ -109,3 +109,29 @@ def clf_loop(models, x_train, x_test, y_train, y_test, grid=small_grid):
                 print(e)
                 continue
     return results_df
+
+
+def best_grid(rdf, method = "auc-roc"):
+    '''
+    Iterate over the results and get the best parameters for each classifier
+    and save the best_grid as a dictionary
+    
+    '''
+    best = {}
+    model = rdf.groupby("model_type")[method].nlargest(1)
+    model = model.to_frame()
+    model.reset_index(inplace = True)
+    rows = list(model['level_1'])
+    display(rdf.loc[rows].iloc[:,0:8])
+    for row in rows:
+        key = rdf.loc[row]["model_type"]
+        v = rdf.loc[row]["parameters"]
+        best[key] = v
+    
+    for k,arg in best.items():
+        for key,val in arg.items():
+            arg[key] = [val]
+
+    return best
+
+
