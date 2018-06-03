@@ -17,7 +17,7 @@ def run(data, zipcodes):
 	asc_cols = list(unique_asc.columns)
 	df_cols = list(total_df.columns)
 	cols = list(set(asc_cols).difference(set(df_cols)))
-	asc = asc.drop(cols+['state'], axis=1)
+	asc = asc.drop(cols, axis=1)
 
 	# Merging with asc data
 	total_df = merge(fips, asc)
@@ -28,6 +28,6 @@ def run(data, zipcodes):
 
 if __name__=="__main__":
 
-	data = pd.read_csv("df.csv")
+	data = pd.read_csv("final_data.csv")
 	zipcodes = pd.read_csv("zipcodes.csv")
 	run(data, zipcodes)
