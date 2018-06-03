@@ -1,5 +1,21 @@
 
-
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import graphviz
+import seaborn as sns; sns.set()
+from sklearn.linear_model import SGDClassifier 
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, AdaBoostClassifier, ExtraTreesClassifier, GradientBoostingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
+from sklearn.neighbors.nearest_centroid import NearestCentroid
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split, ParameterGrid
+from sklearn.metrics import *
+import time
 
 def finding_risk_scores(x_train, x_test, y_train, y_test, grid):
     '''
