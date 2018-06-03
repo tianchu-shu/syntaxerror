@@ -3,6 +3,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from random import randint
 
+def bar_charts(results)
+    for item in ['auc-roc','precision','time']:
+        plt.figure()
+        results.groupby(['model_type'])[item].mean().plot(kind='bar', title='Average '+item+' across classifiers')
+        plt.ylabel(item)
 
 def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     '''
