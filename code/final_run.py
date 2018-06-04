@@ -33,7 +33,7 @@ def run():
 	
 		
 	# MODELS & EVALUATION
-	#result = temporal_eval(features, df)
+	#result = temporal_eval(features, df) - Based off Rayid's temporal eval  loop
 	
 	# COPYTING THE DATASET TO BE USED FOR SPLITTING 
 	viz_df = df.copy()
