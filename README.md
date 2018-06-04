@@ -83,23 +83,16 @@ Final modeling results
 
 2) Python code ("/code")
 
-< File Name>
 - census.py
 - run_api.py
-
-< Description>
   : Codes to retrieve census data to be used as demographic data
 
 
-< File Name >
 - final_default_grids.py
 - jocojims.py
 - indpv_lists.py
+  : Settings for the pipeline
 
-< Description >
-  : Set up files for the pipeline
-
-< File Name >
 
 - final_connection.py
 - final_load_dfs.py
@@ -108,12 +101,11 @@ Final modeling results
 - final_temporal.py
 - final_classifier_final.py
 - final_plot.py
+  : Codes for the final pipeline
 
-< File Name >
 - final_pipeline.py
 - final_run.py
 
-< Description >
   : Gathered functions for each part of pipeline and put together in final_pipeline except data exploration
 
 
