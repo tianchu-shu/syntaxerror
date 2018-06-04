@@ -47,7 +47,7 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     forest = clf.fit(x_train, y_train)
     indepv = list(x_train.columns)
     importances = forest.feature_importances_
-    current_palette = sns.color_palette(sns.color_palette("Set2", 10))
+    current_palette = sns.color_palette(sns.color_palette("cubehelix", 20))
     
     indices = np.argsort(importances)[::-1]
     indices = indices[:k]
