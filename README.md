@@ -45,11 +45,10 @@ We have worked on
 1) Jupyter notebook
 
 #### Final modeling results
-- All-var.ipynb
 - Person_societal_var.ipynb
 - Bail_info.ipynb
-- Comiling_everything.ipynb
-- mh_var.ipynb
+- mh_info.ipynb
+- All-var.ipynb
 
 
 2) Python code ("/code")
