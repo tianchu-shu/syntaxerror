@@ -17,6 +17,7 @@ from sklearn.metrics import *
 import time
 import seaborn as sns
 
+
 clfs = {'RF': RandomForestClassifier(),
     'Boost': AdaBoostClassifier(DecisionTreeClassifier(max_depth=1)),
     'Logit': LogisticRegression(),
@@ -27,11 +28,13 @@ clfs = {'RF': RandomForestClassifier(),
     'ET': ExtraTreesClassifier(n_estimators=10, n_jobs=-1, criterion='entropy'),
     'NB': GaussianNB()}
 
+
 def bar_charts(results):
     for item in ['auc-roc','precision','time']:
         plt.figure()
         results.groupby(['model_type'])[item].mean().plot(kind='bar', title='Average '+item+' across classifiers')
         plt.ylabel(item)
+
 
 def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     '''
@@ -113,7 +116,6 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
 
     
 def plot_df(df, columns, save=False):
-
     for col in columns:
         count_column = df[col].value_counts()
         plt.figure(figsize=(len(count_column), 5))
@@ -129,7 +131,6 @@ def plot_df(df, columns, save=False):
             plt.show()
     return None
 
-
     
 #Printing out the best decision tree
 def print_tree(x_train, y_train, bestm):
@@ -140,6 +141,7 @@ def print_tree(x_train, y_train, bestm):
     for p in ParameterGrid(bestm["Tree"]):
         clf.set_params(**p)
         tree = clf.fit(x_train, y_train)
+        indepv= list(x_train.columns)
         tree_viz = export_graphviz(tree, out_file=None, feature_names=indepv, rounded=True, filled=True)
         graph =graphviz.Source(tree_viz)
             
@@ -166,7 +168,7 @@ def plot_best(models, x_train, x_test, y_train, y_test, bestm):
 
 
 
-def  plot_precision_recall_n (y_true, y_score, model_name,  para = None, fig =None):
+def plot_precision_recall_n (y_true, y_score, model_name,  para = None, fig =None):
     precision_curve, recall_curve, pr_thresholds = precision_recall_curve(y_true, y_score)
     precision_curve = precision_curve[:-1]
     recall_curve = recall_curve[:-1]
