@@ -82,6 +82,15 @@ Codes for the final pipeline
 Gathered functions for each part of pipeline and put together in final_pipeline except data exploration
 
 
+## Running the code
+
+- Via Jupyter Notebook
+
+- Via Python file & Terminal
+  ```
+  run finaLrun.py 
+  ```
+
 
 ## Brief
 In general, all work for preliminary steps of the project is located in raw， all code for the pipeline can be found in code with the prefix 'final' (eg. final_plot).
