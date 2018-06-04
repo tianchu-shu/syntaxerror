@@ -44,7 +44,7 @@ We have worked on
 ## Codes
 1) Jupyter notebook
 
-Final modeling results
+## H2 Final modeling results
 - All-var.ipynb
 - Person_societal_var.ipynb
 - Bail_info.ipynb
@@ -54,17 +54,18 @@ Final modeling results
 
 2) Python code ("/code")
 
+## H2 Codes to retrieve census data to be used as demographic data
+
 - census.py
 - run_api.py
 
-Codes to retrieve census data to be used as demographic data
-
+## H2 Settings for the pipeline
 
 - final_default_grids.py
 - jocojims.py
 - indpv_lists.py
 
-Settings for the pipeline
+## H2 Codes for the final pipeline
 
 - final_connection.py
 - final_load_dfs.py
@@ -73,13 +74,11 @@ Settings for the pipeline
 - final_temporal.py
 - final_classifier_final.py
 - final_plot.py
-
-Codes for the final pipeline
-
 - final_pipeline.py
-- final_run.py
 
-Gathered functions for each part of pipeline and put together in final_pipeline except data exploration
+## H2 Gathered functions for each part of pipeline and put together except data exploration
+
+- final_run.py
 
 
 ## Running the code
