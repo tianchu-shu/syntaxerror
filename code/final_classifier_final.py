@@ -135,7 +135,7 @@ def best_grid(rdf, method = "auc-roc"):
     return best
 
 
-def finding_risk_scores(x_train, x_test, y_train, y_test, grid):
+def finding_risk_scores(x_train, x_test, y_train, y_test, grid, viz_x):
     '''
     Adds the y-pred probs for each model to the x_test
     Can be used to find top X% of people at risk according to any given model
@@ -144,7 +144,6 @@ def finding_risk_scores(x_train, x_test, y_train, y_test, grid):
     for row in grid:
         models.append(row)
     
-    x_test_copy = x_test.copy()
     for index, clf in enumerate([clfs[x] for x in models]):
         model_params = grid[models[index]]
         for p in ParameterGrid(model_params):
@@ -152,6 +151,6 @@ def finding_risk_scores(x_train, x_test, y_train, y_test, grid):
                 y_pred_probs = clf.fit(x_train, y_train).predict_proba(x_test)[:,1]
                 name = str(models[index])
                 print (name)
-                x_test_copy[name] = y_pred_probs
+                viz_x[name] = y_pred_probs
                 
-    return x_test_copy
+    return viz_x
