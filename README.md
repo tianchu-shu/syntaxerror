@@ -122,7 +122,7 @@ Final modeling results
 
 
 
-## Breif
+## Brief
 In general, all work for preliminary steps of the project is located in raw， all code for the pipeline can be found in code with the prefix 'final' (eg. final_plot).
 
 ## Results
