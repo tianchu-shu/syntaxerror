@@ -12,13 +12,13 @@ def run():
 
 	# READ DATA
 	df = load_from_file('final_data.csv')
-	acs = load_from_file('fips_acs.csv')
+	#acs = load_from_file('fips_acs.csv')
 
 	# CLEAN & MERGE DATA
-	acs = acs.drop(columns=ACS_DROP, axis=1)
+	#acs = acs.drop(columns=ACS_DROP, axis=1)
 	df = df.dropna(subset=['zip'])
 
-	df = acs.merge(df, how="inner")
+	#df = acs.merge(df, how="inner")
 	df = df.drop_duplicates()
 
 	df = df.drop(DROP_COLS, axis=1)
@@ -33,7 +33,7 @@ def run():
 	
 		
 	# MODELS & EVALUATION
-	#result = temporal_eval(features, df) - Based off Rayid's temporal eval  loop
+	#result = temporal_eval(features, df) - Based off Rayid's temporal eval loop
 	
 	# COPYTING THE DATASET TO BE USED FOR SPLITTING 
 	viz_df = df.copy()
@@ -45,19 +45,19 @@ def run():
 	
 	
 	# SPLITTING DATASET INTO TRAINING AND TESTING
-	train, test = temporal_split(df, 'booking_date', start, middle_date, end)
-	trainv,testv = temporal_split(viz_df, 'booking_date', start, middle_date, end)
+	train, test = temporal_split(df, 'booking_date', START, MID, END)
+	trainv,testv = temporal_split(viz_df, 'booking_date', START, MID, END)
 	
 	x_train, x_test, y_train, y_test = split_data(train, test, Y)
 	
 	a, viz_x, b, c = split_data(trainv,testv, Y)
 	
 	
-	while len(features_list)>0:
-		num = len(features_list)
+	while len(FEATURE_LISTS)>0:
+		num = len(FEATURE_LISTS)
 		# Running on All the var including mental health and bail var
-		x_train = x_train[features_list[num]]
-		x_test = x_test[features_list[num]]
+		x_train = x_train[FEATURE_LISTS[num]]
+		x_test = x_test[FEATURE_LISTS[num]]
 	
 	
 		for i in range(len(Y)):
@@ -70,12 +70,12 @@ def run():
 			RF_df = df_sorting.sort_values(by=['RF'], ascending=False)
 
 			#PLOTTING THE SELECTED FEATURES
-			plot_df(RF_df[:50], features_to_see, save=False)
+			plot_df(RF_df[:50], FEATURES_TO_SEE, save=False)
 
 			#PRECISON_RECALL GRAPHS OF THE BEST MODEL
 			plot_best(MODELS_TO_RUN,  x_train, x_test, y_train[Y[i]], y_test[Y[i]], best)
 			
-		del (features_list[-1])
+		del (FEATURE_LISTS[-1])
 	
 	
 
