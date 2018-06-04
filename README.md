@@ -54,18 +54,18 @@ We have worked on
 
 2) Python code ("/code")
 
-# Codes to retrieve census data to be used as demographic data
+#### Codes to retrieve census data to be used as demographic data
 
 - census.py
 - run_api.py
 
-# Settings for the pipeline
+#### Settings for the pipeline
 
 - final_default_grids.py
 - jocojims.py
 - indpv_lists.py
 
-# Codes for the final pipeline
+#### Codes for the final pipeline
 
 - final_connection.py
 - final_load_dfs.py
@@ -76,7 +76,7 @@ We have worked on
 - final_plot.py
 - final_pipeline.py
 
-# Gathered functions for each part of pipeline and put together except data exploration
+#### Gathered functions for each part of pipeline and put together except data exploration
 
 - final_run.py
 
