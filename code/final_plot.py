@@ -76,7 +76,8 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     Run model with the best given params on x and y
     and print out all the best models' on the same graph
     '''
-    current_palette = sns.color_palette(sns.color_palette())
+    k = len(models)
+    current_palette = sns.color_palette(sns.color_palette("Paired", k))
     fig, ax1 = plt.subplots()
     ax1.set_xlabel('percent of population')
     ax1.set_ylabel('precision', color='#3498db')
@@ -175,9 +176,9 @@ def plot_precision_recall_n (y_true, y_score, model_name,  para = None, fig =Non
     pct_above_per_thresh = np.array(pct_above_per_thresh)
     plt.clf()
     fig, ax1 = plt.subplots()
-    ax1.plot(pct_above_per_thresh, precision_curve, "#34495e")
+    ax1.plot(pct_above_per_thresh, precision_curve, "#3498db")
     ax1.set_xlabel('percent of population')
-    ax1.set_ylabel('precision', color="#34495e")
+    ax1.set_ylabel('precision', color="#3498db")
     ax2 = ax1.twinx()
     ax2.plot(pct_above_per_thresh, recall_curve, '#e74c3c')
     ax2.set_ylabel('recall', color='#e74c3c')
