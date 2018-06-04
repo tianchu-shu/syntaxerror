@@ -1,6 +1,6 @@
 from indpv_lists import *
 
-Y = ['within_one', 'within_two]
+Y = ['within_one', 'within_two']
      
 DATE_COLS = ['booking_date', 'release_date']
 
