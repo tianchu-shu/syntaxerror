@@ -4,7 +4,8 @@ Contributors: [Andrew Deng](https://github.com/CAPPAndrew), [Amir Kazi](https://
 
 
 ## Project goal
-__Syntax Error__ aims to identify which inmates are most at risk of recidivism following their release within one year or two year, using the resources of the Johnson county jail system.
+__Syntax Error__ aims to identify which inmates are most at risk of recidivism following their release within one year or two year, using personal data, mental health records from Johnson county jail system and demographic data of 
+neighborhood areas
 
 
 ## Content
@@ -27,21 +28,9 @@ __Syntax Error__ aims to identify which inmates are most at risk of recidivism f
 9. requests
 10. graphviz
 
-# syntaxerror-mlpp2018
-
-Contributors: [Andrew Deng](https://github.com/CAPPAndrew), [Amir Kazi](https://github.com/amirkazi), [Tianchu Shu](https://github.com/tianchu-shu) and [Jessica Song](https://github.com/belovedsong)
-
-
-__Syntax Error__ aims to identify which inmates are most at risk of recidivism following their release within one year or two year, using the resources of the Johnson county jail system.
-
-## Project Goal
-Identify individuals at risk going back to jail using personal data, mental health records, and demographic data of 
-neighborhood areas
-
 
 ## Data Sources
 Johnson County Jail, Census Bureau
-
 
 
 ## What We've Done
@@ -50,24 +39,6 @@ We have worked on
 2) Data Cleaning, Data Integration, and Pre-Processing
 3) Feature Generation
 4) Machine learning Classifiers & Evaluations (Pipeline)
-
-
-## Package to install
-
-1. pandas
-2. psycopg2
-3. numpy
-4. matplotlib
-5. seaborn
-6. psycopg2
-7. sklearn
-8. datetime
-9. requests
-10. graphviz
-
-
-## Features from Census
-In general, all code for the pipeline can be found in code with the prefix 'final' (eg. final_plot) and all work for preliminary steps of the project is located in raw. 
 
 
 ## Codes
@@ -86,14 +57,14 @@ Final modeling results
 - census.py
 - run_api.py
 
-: Codes to retrieve census data to be used as demographic data
+  Codes to retrieve census data to be used as demographic data
 
 
 - final_default_grids.py
 - jocojims.py
 - indpv_lists.py
 
-: Settings for the pipeline
+  Settings for the pipeline
 
 
 - final_connection.py
@@ -104,16 +75,12 @@ Final modeling results
 - final_classifier_final.py
 - final_plot.py
 
-: Codes for the final pipeline
+  Codes for the final pipeline
 
 - final_pipeline.py
 - final_run.py
 
-: Gathered functions for each part of pipeline and put together in final_pipeline except data exploration
-
-
-## Running the code
-
+  Gathered functions for each part of pipeline and put together in final_pipeline except data exploration
 
 
 
