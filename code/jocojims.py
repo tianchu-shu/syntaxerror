@@ -11,7 +11,7 @@ DUMMIES = ['sex', 'race','mar_stat', 'case_type', 'arresting_agency', 'arresting
 CATS = ['age', 'per_capita_income', 'poverty_stat', 'household_income',
        'mortgage_stat', 'school_enrollment_16-19', 'own_children_under18',
        'SSI_income', 'grandparent_care', 'military_service', 'education_25',
-       'property_value_occupied', 'retirement_income', 'rent_over_income','bail_amt']
+       'property_value_occupied', 'retirement_income', 'rent_over_income','bail_amt', 'pri_dx_value', 'refferal_source']
 
 #FEATURES = all_var
 
