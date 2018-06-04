@@ -143,6 +143,7 @@ def finding_risk_scores(x_train, x_test, y_train, y_test, grid, viz_x):
     models = []
     for row in grid:
         models.append(row)
+    rv = viz_x.copy()
     
     for index, clf in enumerate([clfs[x] for x in models]):
         model_params = grid[models[index]]
@@ -151,6 +152,6 @@ def finding_risk_scores(x_train, x_test, y_train, y_test, grid, viz_x):
                 y_pred_probs = clf.fit(x_train, y_train).predict_proba(x_test)[:,1]
                 name = str(models[index])
                 print (name)
-                viz_x[name] = y_pred_probs
+                rv[name] = y_pred_probs
                 
-    return viz_x
+    return rv
