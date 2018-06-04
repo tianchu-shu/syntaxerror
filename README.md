@@ -114,11 +114,10 @@ Final modeling results
 - final_run.py
 
 < Description >
-  : Gathered functions for each part of pipeline and put together in final_pipeline except data exploration part
+  : Gathered functions for each part of pipeline and put together in final_pipeline except data exploration
 
 
 ## Running the code
-
 
 
 
