@@ -111,6 +111,25 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     plt.show()
 
     
+def plot_df(df, columns, save=False):
+
+    for col in columns:
+        count_column = df[col].value_counts()
+        plt.figure(figsize=(len(count_column), 5))
+        column_figure = sns.barplot(count_column.index, count_column.values, alpha=0.8)
+        plt.title('{} values'.format(col))
+        plt.ylabel('Number of Counts', fontsize=12)
+        plt.xlabel(col, fontsize=12) 
+
+        if save: 
+            column_figure.figure.savefig('{}.png'.format(col))
+            print('figure is saved as a file ~.png')
+        else:
+            plt.show()
+    return None
+
+
+    
 #Printing out the best decision tree
 def print_tree(x_train, y_train, bestm):
     '''
