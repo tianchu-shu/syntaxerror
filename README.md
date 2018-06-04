@@ -88,7 +88,7 @@ Gathered functions for each part of pipeline and put together in final_pipeline 
 
 - Via Python file & Terminal
   ```
-  run finaLrun.py 
+  python final_run.py 
   ```
 
 
