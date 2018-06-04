@@ -42,7 +42,7 @@ We have worked on
 
 
 ## Codes
-1)#Jupyter notebook
+1) Jupyter notebook
 
 Final modeling results
 - All-var.ipynb
@@ -52,7 +52,7 @@ Final modeling results
 - mh_var.ipynb
 
 
-2)#Python code ("/code")
+2) Python code ("/code")
 
 - census.py
 - run_api.py
