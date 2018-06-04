@@ -12,7 +12,7 @@ crime_var = ['case_typeCR', 'case_typeDV', 'case_typeJV',
 
 individual_var = ['age_bin1', 'age_bin2', 'age_bin3', 'age_bin4', 'own_children_under18_bin1', 'own_children_under18_bin2', 'own_children_under18_bin3', 'own_children_under18_bin4',  'grandparent_care_bin1', 'grandparent_care_bin2', 'grandparent_care_bin3', 'grandparent_care_bin4','military_service_bin1', 'military_service_bin2', 'military_service_bin3', 'military_service_bin4']
 
-bail_var = ['bailed_out', 'bail_typeCA', 'bail_typeGPS', 'bail_typeORCD', 'bail_typePR', 'bail_typeSUR', 'bail_amt_bin']
+bail_var = ['bailed_out', 'bail_typeCA', 'bail_typeGPS', 'bail_typeORCD', 'bail_typePR', 'bail_typeSUR', 'bail_amt_bin1', 'bail_amt_bin2', 'bail_amt_bin3', 'bail_amt_bin4']
 
 econ_var = ['per_capita_income_bin1', 'per_capita_income_bin2', 'per_capita_income_bin3', 'per_capita_income_bin4', 'poverty_stat_bin1', 'poverty_stat_bin2', 'poverty_stat_bin3', 'poverty_stat_bin4', 'household_income_bin1', 'household_income_bin2', 'household_income_bin3', 'household_income_bin4',
             'mortgage_stat_bin1', 'mortgage_stat_bin2', 'mortgage_stat_bin3', 'mortgage_stat_bin4', 'SSI_income_bin1', 'SSI_income_bin2', 'SSI_income_bin3', 'SSI_income_bin4', 'property_value_occupied_bin1', 'property_value_occupied_bin2', 'property_value_occupied_bin3', 'property_value_occupied_bin4', 'retirement_income_bin1', 'retirement_income_bin2', 'retirement_income_bin3', 'retirement_income_bin4', 'rent_over_income_bin1', 'rent_over_income_bin2', 'rent_over_income_bin3', 'rent_over_income_bin4']
