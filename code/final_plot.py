@@ -76,15 +76,12 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
     Run model with the best given params on x and y
     and print out all the best models' on the same graph
     '''
-    colors = []
-    colors = 'bgrcmykw'
-    color_index = 0
-
+    current_palette = sns.color_palette(sns.color_palette())
     fig, ax1 = plt.subplots()
     ax1.set_xlabel('percent of population')
-    ax1.set_ylabel('precision', color='b')
+    ax1.set_ylabel('precision', color='#3498db')
     ax2 = ax1.twinx()
-    ax2.set_ylabel('recall', color='r')
+    ax2.set_ylabel('recall', color="#e74c3c")
     for index, clf in enumerate([clfs[x] for x in models]):
         model_params = bestm[models[index]]
         for p in ParameterGrid(model_params):
@@ -103,14 +100,11 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
                     pct_above_per_thresh.append(pct_above_thresh)
                 pct_above_per_thresh = np.array(pct_above_per_thresh)
                 
-                ax1.plot(pct_above_per_thresh, precision_curve, c=colors[color_index])
-                ax2.plot(pct_above_per_thresh, recall_curve, c=colors[color_index])                
+                ax1.plot(pct_above_per_thresh, precision_curve, c=current_palette[index])
+                ax2.plot(pct_above_per_thresh, recall_curve, c=current_palette[index])                
             except IndexError as e:
                 print(e)
                 continue
-        color_index += 1
-        if color_index >= 7:
-            color_index = 0
     ax1.legend(models)
     plt.show()
 
@@ -181,12 +175,12 @@ def plot_precision_recall_n (y_true, y_score, model_name,  para = None, fig =Non
     pct_above_per_thresh = np.array(pct_above_per_thresh)
     plt.clf()
     fig, ax1 = plt.subplots()
-    ax1.plot(pct_above_per_thresh, precision_curve, 'b')
+    ax1.plot(pct_above_per_thresh, precision_curve, "#34495e")
     ax1.set_xlabel('percent of population')
-    ax1.set_ylabel('precision', color='b')
+    ax1.set_ylabel('precision', color="#34495e")
     ax2 = ax1.twinx()
-    ax2.plot(pct_above_per_thresh, recall_curve, 'r')
-    ax2.set_ylabel('recall', color='r')
+    ax2.plot(pct_above_per_thresh, recall_curve, '#e74c3c')
+    ax2.set_ylabel('recall', color='#e74c3c')
     
     plt.title('2-class Precision-Recall curve for {} model: AUC={:.2f} \n with parameters: {}'.\
                         format(model_name, average_precision_score(y_true, y_score), para))
