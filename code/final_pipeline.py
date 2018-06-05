@@ -557,7 +557,7 @@ def extract_train_test_sets(df, col, train_start, train_end, test_start, test_en
 
 
 # TEMPORAL HOLDOUTS
-def temporal_eval(features, df, col='booking_date', target=None, save=True):
+def temporal_eval(features, df, col='booking_date', target=None, save=False):
 
     '''
     Temporal evaluation function with data-specific function(within_frame2)
@@ -585,8 +585,8 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
             train_end_time = test_start_time  - relativedelta(days=+1) # minus 1 day
             train_start_time = train_end_time - relativedelta(months=+window)
             while (train_start_time >= start_time_date):
-                print("Train_Start: {}  Train_End: {}".format(train_start_time, train_end_time))
-                print("Test_Start: {}  Test_End: {}".format(test_start_time, test_end_time))
+                print("Train_Start: {}  Train_End: {}".format(train_start_time.date(), train_end_time.date()))
+                print("Test_Start: {}  Test_End: {}".format(test_start_time.date(), test_end_time.date()))
                 train_start_time -= relativedelta(months=+window)
                 # call function to get data
                 train_set, test_set = extract_train_test_sets(df, col, train_start_time, train_end_time, test_start_time, test_end_time)
