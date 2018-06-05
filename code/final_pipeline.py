@@ -553,7 +553,7 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
                 x_train, x_test = train_set[features], test_set[features]
                 y_train, y_test = train_set[target], test_set[target]
                 # predict on test data
-                baseline = basline(df, target)
+                baseline = baseline(df, target)
                 result = classifiers_loop(x_train, x_test, y_train, y_test, baseline)
                 result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
                 best_grid(result)
