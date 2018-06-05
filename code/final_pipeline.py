@@ -263,7 +263,7 @@ def bin_gen(df, variables, label, fix_value):
 
         binned = binned.append(bin_label)
         
-        df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list, duplicates = 'drop')
+        df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list)
         df.drop([variable], inplace = True, axis=1)
     
     return df, binned
