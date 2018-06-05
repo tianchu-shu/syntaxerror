@@ -22,11 +22,10 @@ neighborhood areas
 3. numpy
 4. matplotlib
 5. seaborn
-6. psycopg2
+6. graphviz
 7. sklearn
 8. datetime
 9. requests
-10. graphviz
 
 
 ## Data Sources
