@@ -447,7 +447,7 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     for p in ParameterGrid(bestm[x]):
         clf.set_params(**p)
     forest = clf.fit(x_train, y_train)
-    
+    indepv = list(x_train, y_train)
     importances = forest.feature_importances_
     current_palette = sns.color_palette(sns.color_palette("hls", 8))
     indices = np.argsort(importances)[::-1]
