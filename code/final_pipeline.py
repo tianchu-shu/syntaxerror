@@ -221,7 +221,7 @@ def round_to(df, cols=None, digit=0):
     return df
 
 
-def bin_gen(df, variables, label, fix_value):
+def bin_gen(df, variable, label, fix_value):
     '''
     Create a bin column for a given variable, derived by using the 
     description of the column to determine the min, 25, 50, 75 and max
@@ -236,35 +236,33 @@ def bin_gen(df, variables, label, fix_value):
     Outputs:
     df: A panda dataframe
     '''
-
+    variable_min = df[variable].min()
+    variable_25 = df[variable].quantile(q = 0.25)
+    variable_50 = df[variable].quantile(q = 0.50)
+    variable_75 = df[variable].quantile(q = 0.75)
+    variable_max = df[variable].max()
+    
+    bin = [variable_min, variable_25, variable_50, variable_75, variable_max]
+    unique_values = len(set(bin))
+    
     binned = []
-
-    for variable in variables:
-
-        variable_min = df[variable].min()
-        variable_25 = df[variable].quantile(q = 0.25)
-        variable_50 = df[variable].quantile(q = 0.50)
-        variable_75 = df[variable].quantile(q = 0.75)
-        variable_max = df[variable].max()
-        
-        bin = [variable_min, variable_25, variable_50, variable_75, variable_max]
-        unique_values = len(set(bin))
-        
-        label_list = []
-        iterator = 0
-        for x in range(1, unique_values):
-            iterator += 1
-            label_list.append(iterator)
-        
-        if fix_value == 'prefix':
-            bin_label = label + variable
-        elif fix_value == 'suffix':
-            bin_label = variable + label
-
+    label_list = []
+    iterator = 0
+    for x in range(1, unique_values):
+        iterator += 1
+        label_list.append(iterator)
+    
+    if fix_value == 'prefix':
+        bin_label = label + variable
         binned = binned.append(bin_label)
-        
-        df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list)
-        df.drop([variable], inplace = True, axis=1)
+    elif fix_value == 'suffix':
+        bin_label = variable + label
+        binned = binned.append(bin_label)
+    
+    df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list)
+    df.drop([variable], inplace = True, axis=1)
+    
+    df = dummy_variable(bin_label, df)
     
     return df, binned
 
