@@ -1,7 +1,7 @@
 from final_pipeline import *
 from final_plot import *
 from jocojims import *
-from indepv import *
+from indpv_lists import *
 from final_temporal import *
 from final_classifier_final import *
 
