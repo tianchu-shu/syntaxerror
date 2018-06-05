@@ -41,7 +41,7 @@ We have worked on
 4) Machine learning Classifiers & Evaluations (Pipeline)
 
 
-## Codes
+## Code
 1) Jupyter notebook
 
 #### Final modeling results
@@ -53,7 +53,7 @@ We have worked on
 
 2) Python code ("/code")
 
-#### Codes to retrieve census data to be used as demographic data
+#### Code to retrieve census data to be used as demographic data
 
 - census.py
 - run_api.py
@@ -64,7 +64,7 @@ We have worked on
 - jocojims.py
 - indpv_lists.py
 
-#### Codes for the final pipeline
+#### Code for the final pipeline
 
 - final_connection.py
 - final_load_dfs.py
@@ -90,8 +90,12 @@ We have worked on
   ```
 
 
-## Brief
+## Summary
 In general, all work for preliminary steps of the project is located in raw， all code for the pipeline can be found in code with the prefix 'final' (eg. final_plot).
 
 ## Results
-We compared the effectiveness of different models trained on “biased” and “unbiased” feature sets: personal_societal, personal_societal + mental_health, personal_societal + bail_info, and all varaiables.
+We compared the effectiveness of different models trained on “biased” and “unbiased” feature sets: 
+1. All variables (Using all our variables for training data)
+2. Personal & Mental Health related Variables 11
+3. Personal & Bail related Variables
+4. Personal related Variables.
