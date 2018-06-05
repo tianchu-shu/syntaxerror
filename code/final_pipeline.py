@@ -90,7 +90,7 @@ def to_datetime(df, cols, index=-8, format="%Y%m%d"):
 # CUTTING & MERGING DATAFRAME WITH DATETIME RANGE 
 def restrain_datetime(df, date_col='arrest_date', from_date=(2010,1,1), to_date=(2015,12,31)):
 	df.index = df[date_col]
-    df = df.sort_index()
+        df = df.sort_index()
 	df = df[datetime(*from_date):datetime(*to_date)]
 	df = df.reset_index(drop=True)
 
