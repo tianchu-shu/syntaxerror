@@ -24,7 +24,7 @@ def run():
 	df = df.drop(DROP_COLS, axis=1)
 
 	# PRE-PROCESS DATA
-	df, binned = bin_gen(df, CATS, label='binned', fix_value='prefix')
+	df, binned = bin_gen(df, CATS, label='bin', fix_value='suffix')
 	df = dummy_variable(df, DUMMIES+binned)
 
 	remove = DATE_COLS
