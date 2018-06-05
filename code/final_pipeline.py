@@ -297,7 +297,7 @@ def within_frame(df, id_num='dedupe_id', timestamp='booking_date', col_name='re-
 # Based on Rayid's magicloops from here
 # https://github.com/rayidghani/magicloops
 
-def classifiers_loop(x_train, x_test, y_train, y_test, baseline, save=True):
+def classifiers_loop(x_train, x_test, y_train, y_test, save=True):
     results_df =  pd.DataFrame(columns=('model_type','clf', 'parameters', 'auc-roc', 'precision_5', 'accuracy_5', 'recall_5', 'f1_5',
                                                        'precision_10', 'accuracy_10', 'recall_10', 'f1_10',
                                                        'precision_20', 'accuracy_20', 'recall_20', 'f1_20',
