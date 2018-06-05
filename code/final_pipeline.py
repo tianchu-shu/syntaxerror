@@ -337,10 +337,6 @@ def classifiers_loop(x_train, x_test, y_train, y_test, baseline, save=True):
     return results_df
 
 
-def baseline(df, col):
-
-    return df[col].sum() / df.shape[0]
-
 def generate_binary_at_k(y_scores, k):
     cutoff_index = int(len(y_scores) * (k / 100.0))
     predictions_binary = [1 if x < cutoff_index else 0 for x in range(len(y_scores))]
@@ -474,6 +470,10 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     plt.show()
 
 
+def baseline(df, col):
+
+    return df[col].sum() / df.shape[0]
+
 
 # FILTER WITH FREQUENCY OF RE-ENTRY (PREV RELEASED DATE ~ NEXT BOOKING DATE)
 def within_frame2(df, id='dedupe_id', col1='booking_date', col2='release_date', days=365, windows=[1]):
@@ -553,7 +553,7 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
                 x_train, x_test = train_set[features], test_set[features]
                 y_train, y_test = train_set[target], test_set[target]
                 # predict on test data
-                baseline = baseline(df, target)
+                baseline = df[target].sum() / df.shape[0]
                 result = classifiers_loop(x_train, x_test, y_train, y_test, baseline)
                 result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
                 best_grid(result)
