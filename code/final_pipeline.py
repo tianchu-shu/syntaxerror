@@ -38,37 +38,37 @@ UPDATE = 12
 
 
 def load_from_file(dataframe_string, row_num = None):
-	'''
-	Function reads the .csv file into a panda dataframe.
-	Inputs:
-	dataframe_string: String for file name
-	filetype: string for file_type
-	row_num: integer, number of rows to read if excel or csv
-	Outputs:
-	df = A panda dataframe
-	'''
-	if '.csv' in dataframe_string:
-		df = pd.read_csv(dataframe_string, nrows = row_num)
-	elif '.xls' in dataframe_string:
-		df = pd.read_excel(dataframe_string, nrows = row_num)
-	elif '.json' in dataframe_string:
-		df = pd.read_json(dataframe_string)
-	
-	print("Loaded" + dataframe_string)
-	
-	return df
+    '''
+    Function reads the .csv file into a panda dataframe.
+    Inputs:
+    dataframe_string: String for file name
+    filetype: string for file_type
+    row_num: integer, number of rows to read if excel or csv
+    Outputs:
+    df = A panda dataframe
+    '''
+    if '.csv' in dataframe_string:
+        df = pd.read_csv(dataframe_string, nrows = row_num)
+    elif '.xls' in dataframe_string:
+        df = pd.read_excel(dataframe_string, nrows = row_num)
+    elif '.json' in dataframe_string:
+        df = pd.read_json(dataframe_string)
+    
+    print("Loaded" + dataframe_string)
+    
+    return df
 
 
 
 def load_from_db(table_list):
-	df_dict = {}
-	conn = connection.Connect()
-	for x in table_list:
-		file_name = x + "_df"
-		df_dict[file_name] = connection.return_df('table', x)
-		print("Loaded" + file_name)
-	
-	return df_dict
+    df_dict = {}
+    conn = connection.Connect()
+    for x in table_list:
+        file_name = x + "_df"
+        df_dict[file_name] = connection.return_df('table', x)
+        print("Loaded" + file_name)
+    
+    return df_dict
 
 
 
@@ -89,12 +89,12 @@ def to_datetime(df, cols, index=-8, format="%Y%m%d"):
 
 # CUTTING & MERGING DATAFRAME WITH DATETIME RANGE 
 def restrain_datetime(df, date_col='arrest_date', from_date=(2010,1,1), to_date=(2015,12,31)):
-	df.index = df[date_col]
+    df.index = df[date_col]
     df = df.sort_index()
-	df = df[datetime(*from_date):datetime(*to_date)]
-	df = df.reset_index(drop=True)
+    df = df[datetime(*from_date):datetime(*to_date)]
+    df = df.reset_index(drop=True)
 
-	return df
+    return df
 
 
 
@@ -123,21 +123,21 @@ def checking_for_nulls(dataframe):
 # FILL IN MISSING VALUES WITH SELECTED METHODS FOR EACH TYPE 
 def fill_missing(df, method1="missing", method2="median"):
 
-	for col in df:
-		if df[col].dtype == 'object' and method1 == "missing":
-			df[col].fillna("Missing")
-		elif df[col].dtype == 'object' and method1 != "missing":
-			try:
-				df[col].fillna(df[col].mode()[0], inplace=True)
-			except:
-				df[col].fillna("Missing")
-		elif df[col].dtype == 'int' or df[col].dtype == 'float':
-			if method == "mean":
-				df[col].fillna(df[col].mean(), inplace=True)
-			if method == "median":
-				df[col].fillna(df[col].median(), inplace=True)
+    for col in df:
+        if df[col].dtype == 'object' and method1 == "missing":
+            df[col].fillna("Missing")
+        elif df[col].dtype == 'object' and method1 != "missing":
+            try:
+                df[col].fillna(df[col].mode()[0], inplace=True)
+            except:
+                df[col].fillna("Missing")
+        elif df[col].dtype == 'int' or df[col].dtype == 'float':
+            if method == "mean":
+                df[col].fillna(df[col].mean(), inplace=True)
+            if method == "median":
+                df[col].fillna(df[col].median(), inplace=True)
 
-	return df
+    return df
 
 
 
@@ -163,19 +163,19 @@ def outlier(df, variable):
 
 # CHANGE IN VARS FOR EACH
 def is_changed(df, id_num='mni_no', var='mar_stat'):
-	df['{}_changed'.format(var)] = (df[var]!=df[var].shift()) | (df[id_num]!=df[id_num].shift())
+    df['{}_changed'.format(var)] = (df[var]!=df[var].shift()) | (df[id_num]!=df[id_num].shift())
 
-	return df
-	
+    return df
+    
 
 
 # CUM SUM OF VARS
 def cum_vals(df, id_num='mni_no', var='re-enter-days'):
 
-	df = df.sort_values(by=[id_num, var])
-	df['{}_so_far'.format(var)] = df.groupby(id_num)[var].cumsum()
+    df = df.sort_values(by=[id_num, var])
+    df['{}_so_far'.format(var)] = df.groupby(id_num)[var].cumsum()
 
-	return df
+    return df
 
 
 
@@ -242,30 +242,30 @@ def bin_gen(df, variables, label, fix_value):
 
     for variable in variables:
 
-	    variable_min = df[variable].min()
-	    variable_25 = df[variable].quantile(q = 0.25)
-	    variable_50 = df[variable].quantile(q = 0.50)
-	    variable_75 = df[variable].quantile(q = 0.75)
-	    variable_max = df[variable].max()
-	    
-	    bin = [variable_min, variable_25, variable_50, variable_75, variable_max]
-	    unique_values = len(set(bin))
-	    
-	    label_list = []
-	    iterator = 0
-	    for x in range(1, unique_values):
-	        iterator += 1
-	        label_list.append(iterator)
-	    
-	    if fix_value == 'prefix':
-	        bin_label = label + variable
-	    elif fix_value == 'suffix':
-	        bin_label = variable + label
+        variable_min = df[variable].min()
+        variable_25 = df[variable].quantile(q = 0.25)
+        variable_50 = df[variable].quantile(q = 0.50)
+        variable_75 = df[variable].quantile(q = 0.75)
+        variable_max = df[variable].max()
+        
+        bin = [variable_min, variable_25, variable_50, variable_75, variable_max]
+        unique_values = len(set(bin))
+        
+        label_list = []
+        iterator = 0
+        for x in range(1, unique_values):
+            iterator += 1
+            label_list.append(iterator)
+        
+        if fix_value == 'prefix':
+            bin_label = label + variable
+        elif fix_value == 'suffix':
+            bin_label = variable + label
 
-	    binned = binned.append(bin_label)
-	    
-	    df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list, duplicates = 'drop')
-	    df.drop([variable], inplace = True, axis=1)
+        binned = binned.append(bin_label)
+        
+        df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list, duplicates = 'drop')
+        df.drop([variable], inplace = True, axis=1)
     
     return df, binned
 
@@ -288,12 +288,12 @@ def dummy_variable(df, variable):
 
 # FILTER WITH FREQUENCY OF RE-ENTRY (PREV BOOKING DATE ~ NEXT BOOKING DATE)
 def within_frame(df, id_num='dedupe_id', timestamp='booking_date', col_name='re-entry', duration=365):
-	df = df.sort_values(by=[id_num, timestamp])
-	df['{}'.format(col_name)] = df.groupby[id_num][timestamp].diff()
-	df['{}'.format(col_name)] = df['{}'.format(col_name)].apply(lambda x: x.days)
-	df['within_{}'.format(duration)] = np.where(df['{}'.format(col_name)]>duration, 1, 0)    
-	
-	return df
+    df = df.sort_values(by=[id_num, timestamp])
+    df['{}'.format(col_name)] = df.groupby[id_num][timestamp].diff()
+    df['{}'.format(col_name)] = df['{}'.format(col_name)].apply(lambda x: x.days)
+    df['within_{}'.format(duration)] = np.where(df['{}'.format(col_name)]>duration, 1, 0)    
+    
+    return df
 
 
 
@@ -338,14 +338,14 @@ def classifiers_loop(x_train, x_test, y_train, y_test, baseline, save=True):
                     continue
 
     if save:
-    	results_df.to_csv('results.csv', index=False)
+        results_df.to_csv('results.csv', index=False)
 
     return results_df
 
 
 def baseline(df, col):
 
-	return df[col].sum() / df.shape[0]
+    return df[col].sum() / df.shape[0]
 
 def generate_binary_at_k(y_scores, k):
     cutoff_index = int(len(y_scores) * (k / 100.0))
@@ -354,13 +354,13 @@ def generate_binary_at_k(y_scores, k):
 
 
 def evals_at_k(y_true, y_scores, k):
-	preds_at_k = generate_binary_at_k(y_scores, k)
-	accuracy = accuracy_score(y_true, preds_at_k)
-	precision = precision_score(y_true, preds_at_k)
-	recall = recall_score(y_true, preds_at_k)
-	f1 = f1_score(y_true, preds_at_k)
+    preds_at_k = generate_binary_at_k(y_scores, k)
+    accuracy = accuracy_score(y_true, preds_at_k)
+    precision = precision_score(y_true, preds_at_k)
+    recall = recall_score(y_true, preds_at_k)
+    f1 = f1_score(y_true, preds_at_k)
 
-	return precision, accuracy, recall, f1
+    return precision, accuracy, recall, f1
 
 
 def plot_roc(name, probs, true, save=True):
@@ -443,7 +443,7 @@ def best_grid(rdf, method = "auc-roc"):
         for key,val in arg.items():
             arg[key] = [val]
 
-    return best	
+    return best 
 
 
 # FEATURE IMPORTANCES 
@@ -478,93 +478,92 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     plt.xlim([-1, len(indices)])
     plt.xticks(range(len(indices)),labels_arr, rotation = 'vertical')
     plt.show()
-																																																				A	return None
 
 
 
 # FILTER WITH FREQUENCY OF RE-ENTRY (PREV RELEASED DATE ~ NEXT BOOKING DATE)
 def within_frame2(df, id='dedupe_id', col1='booking_date', col2='release_date', days=365, windows=[1]):
-	
-	# Change to datetime
-	df[col1] = pd.to_datetime(df[col1])
-	df[col2] = pd.to_datetime(df[col2])
+    
+    # Change to datetime
+    df[col1] = pd.to_datetime(df[col1])
+    df[col2] = pd.to_datetime(df[col2])
 
-	df['after_prev_booked'] = df.groupby(id)[date_col].diff()
-	df['stayed'] = df['stayed'].shift(1)
-	df['stayed'] = df[col2] - df[col1]
+    df['after_prev_booked'] = df.groupby(id)[date_col].diff()
+    df['stayed'] = df['stayed'].shift(1)
+    df['stayed'] = df[col2] - df[col1]
 
-	df = df[df['after_prev_booked'].notnull()]
+    df = df[df['after_prev_booked'].notnull()]
 
-	df['after_released'] = df['after_prev_booked'] - df['stayed']
-	# Convert the datetime type to integer
-	df['after_released'] = df['after_released'].astype('timedelta64[D]')
-
-
-	for window in windows:
-		within = int(window*days)
-		time_frame = 'within_{}yrs'.format(int(within/365))
-		df[time_frame] = np.where(df['after_released'] <= within, 1, 0)
+    df['after_released'] = df['after_prev_booked'] - df['stayed']
+    # Convert the datetime type to integer
+    df['after_released'] = df['after_released'].astype('timedelta64[D]')
 
 
-	return df, time_frame
+    for window in windows:
+        within = int(window*days)
+        time_frame = 'within_{}yrs'.format(int(within/365))
+        df[time_frame] = np.where(df['after_released'] <= within, 1, 0)
+
+
+    return df, time_frame
 
 
 
 # GIVEN TRAIN&TEST PERIODS, SPLIT DATA INTO TRAIN/TEST SETS 
 def extract_train_test_sets(df, col, train_start, train_end, test_start, test_end):
 
-	train_set = df[(train_start <= df[col]) & (df[col]<= train_end)]
-	test_set = df[(test_start <= df[col]) & (df[col]<=test_end)]
+    train_set = df[(train_start <= df[col]) & (df[col]<= train_end)]
+    test_set = df[(test_start <= df[col]) & (df[col]<=test_end)]
 
-	return train_set, test_set
+    return train_set, test_set
 
 
 
 # TEMPORAL HOLDOUTS
-def temporal_eval(target=None, features, df, col='booking_date', save=True):
+def temporal_eval(features, df, col='booking_date', target=None, save=True):
 
-	'''
-	Temporal evaluation function with data-specific function(within_frame2)
+    '''
+    Temporal evaluation function with data-specific function(within_frame2)
 
-	START : start date of data (2010-01-01)
-	END: end date of date (2016-04-30)
+    START : start date of data (2010-01-01)
+    END: end date of date (2016-04-30)
 
-	Input: target (str) - dependent column name 
-		   features (list) - a list of independent column names
-		   df (dataframe) - a entire data set 
-		   col (str) - a date column to be used to split the dataset
+    Input: target (str) - dependent column name 
+           features (list) - a list of independent column names
+           df (dataframe) - a entire data set 
+           col (str) - a date column to be used to split the dataset
 
-	Output: csv file
-	'''
+    Output: csv file
+    '''
 
-	start_time_date = datetime.strptime(START, '%Y-%m-%d')
-	end_time_date = datetime.strptime(END, '%Y-%m-%d')
+    start_time_date = datetime.strptime(START, '%Y-%m-%d')
+    end_time_date = datetime.strptime(END, '%Y-%m-%d')
 
-	for window in WINDOWS:
-		test_end_time = end_time_date
-		while (test_end_time >= start_time_date + 2 * relativedelta(months=+window)):
-			test_start_time = test_end_time - relativedelta(months=+window)
-			train_end_time = test_start_time  - relativedelta(days=+1) # minus 1 day
-			train_start_time = train_end_time - relativedelta(months=+window)
-			while (train_start_time >= start_time_date):
-				print (train_start_time,train_end_time,test_start_time,test_end_time, window)
-				train_start_time -= relativedelta(months=+window)
-				# call function to get data
-				train_set, test_set = extract_train_test_sets(df, col, train_start_time, train_end_time, test_start_time, test_end_time)
-				# apply within_frame2
-				train_set,target = within_frame2(train_set)
-				test_set, target = within_frame2(test_set)
-				# fit on train data
-				x_train, x_test = train_set[features], test_set[features]
-				y_train, y_test = train_set[target], test_set[target]
-				# predict on test data
-				baseline = basline(df, target)
-				result = classifiers_loop(x_train, x_test, y_train, y_test, baseline)
-				result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
-				best_grid(result)
-				feature_importance(x_train, y_train, best)
-				plot_mult(MODELS_TO_RUN, x_train, x_test, y_train, y_test, best)
-			test_end_time -= relativedelta(months=+UPDATE)
+    for window in WINDOWS:
+        test_end_time = end_time_date
+        while (test_end_time >= start_time_date + 2 * relativedelta(months=+window)):
+            test_start_time = test_end_time - relativedelta(months=+window)
+            train_end_time = test_start_time  - relativedelta(days=+1) # minus 1 day
+            train_start_time = train_end_time - relativedelta(months=+window)
+            while (train_start_time >= start_time_date):
+                print (train_start_time,train_end_time,test_start_time,test_end_time, window)
+                train_start_time -= relativedelta(months=+window)
+                # call function to get data
+                train_set, test_set = extract_train_test_sets(df, col, train_start_time, train_end_time, test_start_time, test_end_time)
+                # apply within_frame2
+                train_set,target = within_frame2(train_set)
+                test_set, target = within_frame2(test_set)
+                # fit on train data
+                x_train, x_test = train_set[features], test_set[features]
+                y_train, y_test = train_set[target], test_set[target]
+                # predict on test data
+                baseline = basline(df, target)
+                result = classifiers_loop(x_train, x_test, y_train, y_test, baseline)
+                result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
+                best_grid(result)
+                feature_importance(x_train, y_train, best)
+                plot_mult(MODELS_TO_RUN, x_train, x_test, y_train, y_test, best)
+            test_end_time -= relativedelta(months=+UPDATE)
 
 
 
