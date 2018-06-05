@@ -10,7 +10,6 @@ import pylab as pl
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import mode
-from sklearn.preprocessing import Imputer, StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression, Perceptron, SGDClassifier, OrthogonalMatchingPursuit, RandomizedLogisticRegression
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
