@@ -513,7 +513,6 @@ def plot_mult(models, x_train, x_test, y_train, y_test, bestm):
 
 
 
-
 def baseline(df, col):
 
     return df[col].sum() / df.shape[0]
@@ -586,7 +585,8 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
             train_end_time = test_start_time  - relativedelta(days=+1) # minus 1 day
             train_start_time = train_end_time - relativedelta(months=+window)
             while (train_start_time >= start_time_date):
-                print (train_start_time,train_end_time,test_start_time,test_end_time, window)
+                print("Train_Start: {}  Train_End: {}".format(train_start_time, train_end_time))
+                print("Test_Start: {}  Test_End: {}".format(test_start_time, test_end_time))
                 train_start_time -= relativedelta(months=+window)
                 # call function to get data
                 train_set, test_set = extract_train_test_sets(df, col, train_start_time, train_end_time, test_start_time, test_end_time)
@@ -602,7 +602,7 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
                 result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
                 best = best_grid(result)
                 feature_importance(x_train, y_train, best)
-                plot_mult(MODELS_TO_RUN, x_train, x_test, y_train, y_test, best)
+                #plot_mult(MODELS_TO_RUN, x_train, x_test, y_train, y_test, best)
             test_end_time -= relativedelta(months=+UPDATE)
 
 
