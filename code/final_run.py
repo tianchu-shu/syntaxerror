@@ -11,7 +11,7 @@ def run():
 
 
 	# READ DATA
-	df = load_from_file('final_data.csv')
+	df = load_from_file('FINAL.csv')
 	#acs = load_from_file('fips_acs.csv')
 
 	# CLEAN & MERGE DATA
@@ -54,7 +54,7 @@ def run():
 	
 	
 	while len(FEATURE_LISTS)>0:
-		num = len(FEATURE_LISTS)
+		num = len(FEATURE_LISTS)-1
 		# Running on All the var including mental health and bail var
 		x_train = x_train[FEATURE_LISTS[num]]
 		x_test = x_test[FEATURE_LISTS[num]]
