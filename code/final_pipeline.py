@@ -299,19 +299,6 @@ def within_frame(df, id_num='dedupe_id', timestamp='booking_date', col_name='re-
 
 ########################### BUILDING CLASSIFIERS & EVALUATION ###########################
 
-
-# SPLIT DATA INTO TRAIN/TEST SETS
-def split_data(df, target, features, test_size=0.2):
-	X = df[features]
-	Y = df[target]
-	x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = test_size, random_state = 42)
-
-	return x_train, x_test, y_train, y_test
-
-
-
-
-
 # Based on Rayid's magicloops from here
 # https://github.com/rayidghani/magicloops
 
