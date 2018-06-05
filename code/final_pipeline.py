@@ -2,6 +2,7 @@ from final_default_grids import *
 from datetime import *
 
 import sys
+from IPython.display import display
 import pandas as pd
 import numpy as np
 import pandas.core.algorithms as algos
