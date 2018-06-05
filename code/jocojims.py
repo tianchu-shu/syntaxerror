@@ -1,4 +1,4 @@
-from indpv_lists import *
+import indpv_lists
 
 Y = ['within_one', 'within_two']
      
@@ -18,7 +18,7 @@ CATS = ['age', 'per_capita_income', 'poverty_stat', 'household_income',
      
 MODELS_TO_RUN = ['RF', 'Boost', 'Bag', 'Logit', 'Tree', 'ET', 'NB']
      
-FEATURE_LISTS = [mh_info, bail_info, person_societal_var, all_var]
+FEATURE_LISTS = [indpv_lists.mh_info, indpv_lists.bail_info, indpv_lists.person_societal_var, indpv_lists.all_var]
      
 FEATURES_TO_SEE = ['bail_amt', 'bail_type', 'bailed_out','case_type', 'city', 
        'education_25', 'grandparent_care', 'household_income', 'mar_stat',
