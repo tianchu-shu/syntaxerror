@@ -450,6 +450,7 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     indepv = list(x_train.columns)
     importances = forest.feature_importances_
     current_palette = sns.color_palette(sns.color_palette("hls", 8))
+    
     indices = np.argsort(importances)[::-1]
     indices = indices[:k]
 
