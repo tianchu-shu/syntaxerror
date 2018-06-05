@@ -185,4 +185,5 @@ def plot_precision_recall_n (y_true, y_score, model_name,  para = None, fig =Non
     
     plt.title('2-class Precision-Recall curve for {} model: AUC={:.2f} \n with parameters: {}'.\
                         format(model_name, average_precision_score(y_true, y_score), para))
+    plt.savefig(model_name)
     plt.show()
