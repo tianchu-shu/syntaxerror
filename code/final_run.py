@@ -12,13 +12,6 @@ def run():
 
 	# READ DATA
 	df = load_from_file('FINAL.csv')
-	#acs = load_from_file('fips_acs.csv')
-
-	# CLEAN & MERGE DATA
-	#acs = acs.drop(columns=ACS_DROP, axis=1)
-	df = df.dropna(subset=['zip'])
-
-	#df = acs.merge(df, how="inner")
 	df = df.drop_duplicates()
 
 	df = df.drop(DROP_COLS, axis=1)
