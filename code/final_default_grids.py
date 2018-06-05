@@ -4,7 +4,6 @@ Test: for testing your code
 Small: small grid
 Large: Larger grid that has a lot more parameter sweeps
 """
-from sklearn.preprocessing import Imputer, StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression, Perceptron, SGDClassifier, OrthogonalMatchingPursuit, RandomizedLogisticRegression
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, AdaBoostClassifier
