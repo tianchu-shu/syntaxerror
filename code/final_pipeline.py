@@ -28,7 +28,7 @@ from dateutil.relativedelta import relativedelta
 NOTEBOOK = True
 
 GRID = SMALL_GRID
-MODELS_TO_RUN = ['RF','DT','KNN','LR', 'NB']
+MODELS_TO_RUN = ['RF','DT','KNN', 'NB', 'ET']
 
 
 START = "2010-01-01"
@@ -558,7 +558,7 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
                 result = classifiers_loop(x_train, x_test, y_train, y_test)
                 result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
                 best = best_grid(result)
-                feature_importance(x_train, y_train, best)
+                feature_importance(x_train, y_train[target], best)
                 plot_mult(MODELS_TO_RUN, x_train, x_test, y_train, y_test, best)
             test_end_time -= relativedelta(months=+UPDATE)
 
