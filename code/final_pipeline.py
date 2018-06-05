@@ -532,6 +532,8 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
 
     start_time_date = datetime.strptime(START, '%Y-%m-%d')
     end_time_date = datetime.strptime(END, '%Y-%m-%d')
+    
+    df[col] = pd.to_datetime(df[col])
 
     for window in WINDOWS:
         test_end_time = end_time_date
