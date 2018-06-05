@@ -24,12 +24,10 @@ def run():
 	df = df.drop(DROP_COLS, axis=1)
 
 	# PRE-PROCESS DATA
-	df, binned = bin_gen(df, CATS, label='bin', fix_value='suffix')
-	df = dummy_variable(df, DUMMIES+binned)
-
-	remove = DATE_COLS
-	features = binned+DUMMIES
-	features = list(set(features).difference(set(remove)))
+	for category in CATS:
+		df = bin_gen(df, category, label='_bin', fix_value='suffix')
+	for dummy in DUMMIES:
+		df = dummy_variable(dummy, df)
 	
 		
 	# MODELS & EVALUATION
