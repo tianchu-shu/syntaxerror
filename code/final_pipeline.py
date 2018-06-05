@@ -298,7 +298,7 @@ def within_frame(df, id_num='dedupe_id', timestamp='booking_date', col_name='re-
 # https://github.com/rayidghani/magicloops
 
 def classifiers_loop(x_train, x_test, y_train, y_test, baseline, save=True):
-    results_df =  pd.DataFrame(columns=('model_type','clf', 'parameters', 'baseline', 'auc-roc', 'precision_5', 'accuracy_5', 'recall_5', 'f1_5',
+    results_df =  pd.DataFrame(columns=('model_type','clf', 'parameters', 'auc-roc', 'precision_5', 'accuracy_5', 'recall_5', 'f1_5',
                                                        'precision_10', 'accuracy_10', 'recall_10', 'f1_10',
                                                        'precision_20', 'accuracy_20', 'recall_20', 'f1_20',
                                                        'precision_30', 'accuracy_30', 'recall_30', 'f1_30',
@@ -318,7 +318,7 @@ def classifiers_loop(x_train, x_test, y_train, y_test, baseline, save=True):
                 accuracy_20, precision_20, recall_20, f1_20 = evals_at_k(y_test_sorted,y_pred_probs_sorted,20.0)
                 accuracy_30, precision_30, recall_30, f1_30 = evals_at_k(y_test_sorted,y_pred_probs_sorted,30.0)
                 accuracy_50, precision_50, recall_50, f1_50 = evals_at_k(y_test_sorted,y_pred_probs_sorted,50.0)
-                results_df.loc[len(results_df)] = [MODELS_TO_RUN[i], clf, p, baseline,
+                results_df.loc[len(results_df)] = [MODELS_TO_RUN[i], clf, p,
                                                        roc_auc_score(y_test, y_pred_probs),
                                                        accuracy_5, precision_5, recall_5, f1_5,
                                                        accuracy_10, precision_10, recall_10, f1_10,
@@ -555,9 +555,9 @@ def temporal_eval(features, df, col='booking_date', target=None, save=True):
                 y_train, y_test = train_set[target], test_set[target]
                 # predict on test data
                 #baseline = df[target].sum() / df.shape[0]
-                result = classifiers_loop(x_train, x_test, y_train, y_test, baseline)
+                result = classifiers_loop(x_train, x_test, y_train, y_test)
                 result.to_csv('{} {} {} {}.csv'.format(train_start_time,train_end_time,test_start_time,test_end_time), mode='a', index=False)
-                best_grid(result)
+                best = best_grid(result)
                 feature_importance(x_train, y_train, best)
                 plot_mult(MODELS_TO_RUN, x_train, x_test, y_train, y_test, best)
             test_end_time -= relativedelta(months=+UPDATE)
