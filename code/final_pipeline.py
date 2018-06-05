@@ -245,7 +245,6 @@ def bin_gen(df, variable, label, fix_value):
     bin = [variable_min, variable_25, variable_50, variable_75, variable_max]
     unique_values = len(set(bin))
     
-    binned = []
     label_list = []
     iterator = 0
     for x in range(1, unique_values):
@@ -254,17 +253,15 @@ def bin_gen(df, variable, label, fix_value):
     
     if fix_value == 'prefix':
         bin_label = label + variable
-        binned = binned.append(bin_label)
     elif fix_value == 'suffix':
         bin_label = variable + label
-        binned = binned.append(bin_label)
     
     df[bin_label] = pd.cut(df[variable], bins = bin, include_lowest = True, labels = label_list)
     df.drop([variable], inplace = True, axis=1)
     
     df = dummy_variable(bin_label, df)
     
-    return df, binned
+    return df
 
 
 def dummy_variable(df, variable):
