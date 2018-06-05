@@ -443,7 +443,7 @@ def feature_importance(x_train, y_train, bestm, x="ET", k=10):
     Based on the best grid for each classifer, print out the 
     top k important features
     '''
-    clf = clfs[x]
+    clf = CLFS[x]
     for p in ParameterGrid(bestm[x]):
         clf.set_params(**p)
     forest = clf.fit(x_train, y_train)
